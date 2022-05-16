@@ -1,0 +1,118 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:after, :before {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+a, area, button, [role='button'], input:not([type='range']), label, select, summary, textarea {
+  touch-action: manipulation;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  --notion-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+  'Droid Sans', 'Helvetica Neue', 'Noto Sans', sans-serif;
+  font-family: var(--notion-font);
+  overflow-x: hidden;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  line-height: 1.5715;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  cursor: url(/images/cursor/normal.cur), auto;
+}
+
+.static-tweet blockquote {
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.static-tweet-emoji {
+  height: 1.2em !important;
+  width: 1.2em !important;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  cursor: url(/images/cursor/texto.cur), auto;
+}
+
+ul, li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+
+
+/*滚动条*/
+::-webkit-scrollbar-thumb {
+  background-color: #69d2e7;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #eee;
+}
+
+/*黑色主题*/
+.dark-mode .footer {
+  background: #31363b;
+}
+
+.footer {
+  max-width: 800px;
+  padding: 2%;
+  background: rgba(255, 255, 255, .8);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  transition: background 1s;
+}
+
+@media (max-width: 860px) {
+  .footer {
+    padding: 30px;
+  }
+}
+
+@media only screen and (max-width: 566px) {
+  .footer {
+    flex-direction: column;
+  }
+
+  .footer > div {
+    margin-top: 1em;
+  }
+
+}
