@@ -52,12 +52,6 @@ export default siteConfig({
   // important pages
   navigationLinks: [
     {
-      title: 'Articles',
-      pageId: 'f1199d37579b41cbabfc0b5174f4256a',
-      span_class: 'faa-parent animated-hover',
-      i_class: 'fa fa-archive faa-shake'
-    },
-    {
       title: 'Tags',
       pageId: 'f1199d37579b41cbabfc0b5174f4256a',
       span_class: 'faa-parent animated-hover',

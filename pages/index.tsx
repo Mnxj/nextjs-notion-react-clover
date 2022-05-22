@@ -5,6 +5,7 @@ import {NotionPage} from 'components'
 import Layout from "../components/Layout";
 import {db} from "../lib/db";
 import * as types from "../lib/types";
+import {HomeTop} from "../components/Home";
 
 export const getStaticProps = async () => {
   try {
@@ -22,9 +23,11 @@ export const getStaticProps = async () => {
 }
 
 export default function NotionDomainPage(props) {
-
   return <Layout>
-    <NotionPage {...props} />
+    <HomeTop/>
+    <div id="notion-page">
+      <NotionPage  {...props} />
+    </div>
   </Layout>
 
 }

@@ -384,7 +384,7 @@
   text-overflow: ellipsis;
   color: var(--fg-color);
   text-decoration: none;
-  margin: 1px 0px;
+  margin: 1px 0;
   padding: 4px 6px;
   border-radius: 3px;
   transition: background 120ms ease-in 0s;
@@ -425,4 +425,16 @@
 .spacer {
   margin: 0 2px;
   color: var(--fg-color-2);
+}
+
+.notion-collection-card-size-large img{
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  pointer-events: none;
+  transition: all .6s;
+}
+.notion-collection-card-size-large:hover img {
+  transform: scale(1.1)
 }

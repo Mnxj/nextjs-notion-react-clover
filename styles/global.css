@@ -56,6 +56,7 @@ body {
 p {
   margin-top: 0;
   margin-bottom: 1em;
+  line-height: 1.9rem;
   cursor: url(/images/cursor/texto.cur), auto;
 }
 
@@ -84,13 +85,11 @@ h1, h2, h3, h4, h5, h6 {
   height: 6px;
   background-color: #eee;
 }
+/**
+footer
+ */
 
-/*黑色主题*/
-.dark-mode .footer {
-  background: #31363b;
-}
-
-.footer {
+.siteFooter {
   max-width: 800px;
   padding: 2%;
   background: rgba(255, 255, 255, .8);
@@ -101,18 +100,38 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 860px) {
-  .footer {
+  .siteFooter {
     padding: 30px;
   }
 }
 
 @media only screen and (max-width: 566px) {
-  .footer {
+  .siteFooter {
     flex-direction: column;
   }
 
-  .footer > div {
+  .siteFooter > div {
     margin-top: 1em;
   }
 
 }
+
+.siteInfo {
+  text-align: center;
+  font-size: 13px;
+  color: #b9b9b9
+}
+
+.siteInfo a {
+  color: #b9b9b9
+}
+
+.siteInfo a:hover {
+  color: orange
+}
+
+/*黑色主题*/
+.dark-mode .siteFooter {
+  background: #31363b;
+}
+

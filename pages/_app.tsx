@@ -1,5 +1,3 @@
-// global styles shared across the entire site
-import '/styles/global.css'
 
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css'
@@ -10,13 +8,11 @@ import 'prismjs/themes/prism-coy.css'
 // this might be better for dark mode
 // import 'prismjs/themes/prism-okaidia.css'
 
-// global style overrides for notion
+import '/styles/global.css'
 import '/styles/notion.css'
-
-// style prism-theme
 import '/styles/prism-theme.css'
-// style font-awesome
 import '/styles/font-awesome.min.css'
+import '/styles/load-animation.css'
 
 import * as React from 'react'
 import * as Fathom from 'fathom-client'

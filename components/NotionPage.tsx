@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import cs from 'classnames'
 import {useRouter} from 'next/router'
 import {useSearchParam} from 'react-use'
-import {useTheme} from 'next-themes'
 import {PageBlock} from 'notion-types'
 
 // core notion renderer
@@ -29,7 +28,6 @@ import {PageHeader} from './Header'
 import {GitHubShareButton} from './GitHubShareButton'
 
 import styles from './styles.module.css'
-import BodyClassName from "react-body-classname";
 
 
 // -----------------------------------------------------------------------------
@@ -169,12 +167,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
     []
   )
 
-  // lite mode is for oembed
-  const isLiteMode = lite === 'true'
-
-  const {resolvedTheme} = useTheme()
-  const isDarkMode = resolvedTheme === 'dark'
-
   const siteMapPageUrl = React.useMemo(() => {
     const params: any = {}
     if (lite) params.lite = lite
@@ -215,6 +207,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
   console.log('notion page', {
     isDev: config.isDev,
     title,
+    pageId,
+    rootNotionPageId: site.rootNotionPageId,
+    recordMap
   })
 
   if (!config.isServer) {
@@ -252,8 +247,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
         url={canonicalPageUrl}
       />
 
-      {isLiteMode && <BodyClassName className='notion-lite'/>}
-      {isDarkMode && <BodyClassName className='dark-mode'/>}
 
       <NotionRenderer
         bodyClassName={cs(
@@ -264,7 +257,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         recordMap={recordMap}
         rootPageId={site.rootNotionPageId}
         rootDomain={site.domain}
-        fullPage={!isLiteMode}
+        fullPage={true}
         previewImages={!!recordMap.preview_images}
         showCollectionViewDropdown={false}
         showTableOfContents={true}
