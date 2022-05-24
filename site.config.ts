@@ -6,10 +6,10 @@ export default siteConfig({
 
   // if you want to restrict pages to a single notion workspace (optional)
   // (this should be a Notion ID; see the docs for how to extract this)
-  rootNotionSpaceId: undefined,
+  rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: 'clover-blog',
+  name: 'clover',
   domain: 'clover-blog.cn',
   author: '幸いです',
 
@@ -46,7 +46,7 @@ export default siteConfig({
   //   '/foo': '067dd719a912471ea9a3ac10710e7fdf',
   //   '/bar': '0be6efce9daf42688f65c76b89f8eb27'
   // }
-  pageUrlOverrides: undefined,
+  pageUrlOverrides: null,
 
   // whether to use the default notion navigation style or a custom one with links to
   // important pages

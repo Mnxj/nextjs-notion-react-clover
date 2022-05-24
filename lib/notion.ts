@@ -10,14 +10,14 @@ import {isPreviewImageSupportEnabled, navigationLinks} from './config'
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
     const navigationLinkPageIds = (navigationLinks || [])
-      .map((link) => link?.pageId)
+      .map((link) => link.pageId)
       .filter(Boolean)
 
     if (navigationLinkPageIds.length) {
       return pMap(
         navigationLinkPageIds,
         async (navigationLinkPageId) =>
-          notion.getPage(navigationLinkPageId as any, {
+          notion.getPage(navigationLinkPageId, {
             chunkLimit: 1,
             fetchMissingBlocks: false,
             fetchCollections: false,

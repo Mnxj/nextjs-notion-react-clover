@@ -10,7 +10,7 @@ export interface SiteConfig {
   description?: string
   language?: string
 
-  logo: string
+  logo?: string
 
   github?: string
   zhihu?: string

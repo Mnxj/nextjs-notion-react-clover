@@ -167,6 +167,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
     []
   )
 
+  // lite mode is for oembed
+  const isLiteMode = lite === 'true'
+
   const siteMapPageUrl = React.useMemo(() => {
     const params: any = {}
     if (lite) params.lite = lite
@@ -187,7 +190,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const pageAside = React.useMemo(
     () => (
-      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost}/>
+      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
     ),
     [block, recordMap, isBlogPost]
   )
@@ -195,11 +198,11 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal])
 
   if (router.isFallback) {
-    return <Loading/>
+    return <Loading />
   }
 
   if (error || !site || !block) {
-    return <Page404 site={site} pageId={pageId} error={error}/>
+    return <Page404 site={site} pageId={pageId} error={error} />
   }
 
   const title = getBlockTitle(block, recordMap) || site.name
@@ -257,7 +260,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         recordMap={recordMap}
         rootPageId={site.rootNotionPageId}
         rootDomain={site.domain}
-        fullPage={true}
+        fullPage={!isLiteMode}
         previewImages={!!recordMap.preview_images}
         showCollectionViewDropdown={false}
         showTableOfContents={true}

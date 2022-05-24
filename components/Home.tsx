@@ -42,7 +42,7 @@ export const HomeTop = () => {
                         </p>
                         <div className={styles.topSocial}>
                             <li id="bg-pre">
-                                <img className="flipx" src="/images/next-b.svg" alt="flipx"/>
+                                <img className={styles.bgPre} src="/images/next-b.svg" alt="next-p"/>
                             </li>
                             <li>
                                 <a href="https://github.com/Mnxj" rel="noreferrer"  target="_blank"><img src="/images/github.png" alt="github"/></a>

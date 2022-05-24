@@ -3,15 +3,14 @@ import {domain, isDev} from 'lib/config'
 import {getSiteMap} from 'lib/get-site-map'
 import {resolveNotionPage} from 'lib/resolve-notion-page'
 import {NotionPage} from 'components'
-import * as types from "../lib/types";
 
 export const getStaticProps = async (context) => {
   const rawPageId = context.params.pageId as string
 
   try {
-    const props = await resolveNotionPage(domain, rawPageId) as types.PageProps
+    const props = await resolveNotionPage(domain, rawPageId)
 
-    return { props, revalidate: 10 }
+    return { props, revalidate: 60 }
   } catch (err) {
     console.error('page error', domain, rawPageId, err)
 

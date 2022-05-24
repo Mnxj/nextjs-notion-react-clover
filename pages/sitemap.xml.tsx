@@ -3,6 +3,7 @@ import type { SiteMap } from 'lib/types'
 import { host } from 'lib/config'
 import { getSiteMap } from 'lib/get-site-map'
 
+const Sitemap = () => null
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
     res.statusCode = 405
@@ -46,6 +47,9 @@ const createSitemap = (siteMap: SiteMap) =>
         `
           <url>
             <loc>${host}/${canonicalPagePath}</loc>
+            <lastmod>${new Date().toISOString()}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>1.0</priority>
           </url>
         `.trim()
       )
@@ -53,4 +57,5 @@ const createSitemap = (siteMap: SiteMap) =>
   </urlset>
 `
 
-export default () => null
+
+export default Sitemap

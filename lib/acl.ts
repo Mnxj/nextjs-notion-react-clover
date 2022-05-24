@@ -4,7 +4,7 @@ export const pageAcl = async({
   site,
   recordMap,
   pageId
-}: PageProps): Promise<PageProps|undefined> =>{
+}: PageProps): Promise<PageProps> =>{
     if (!site) {
       return {
         error: {

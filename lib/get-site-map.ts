@@ -12,7 +12,7 @@ const uuid = !!includeNotionIdInUrls
 export async function getSiteMap(): Promise<types.SiteMap> {
   const partialSiteMap = await getAllPages(
     config.rootNotionPageId,
-    config.rootNotionSpaceId as any
+    config.rootNotionSpaceId
   )
 
   return {
@@ -47,7 +47,9 @@ async function getAllPagesImpl(
         throw new Error(`Error loading page "${pageId}"`)
       }
 
-      const canonicalPageId = getCanonicalPageId(pageId, recordMap, {uuid}) as any
+      const canonicalPageId = getCanonicalPageId(pageId, recordMap, {
+        uuid
+      })
 
       if (map[canonicalPageId]) {
         // you can have multiple pages in different collections that have the same id
