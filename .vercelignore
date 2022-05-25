@@ -13,6 +13,5 @@ scripts/
 .editorconfig
 LICENSE
 README
-apm/
 *.log
 
