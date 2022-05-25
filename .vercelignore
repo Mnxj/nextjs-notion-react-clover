@@ -13,5 +13,6 @@ scripts/
 .editorconfig
 LICENSE
 README
+api/
 *.log
 
