@@ -7,6 +7,7 @@ import * as config from '../lib/config'
 import {Links, navigationLinks} from "../lib/config";
 import cs from 'classnames'
 import Link from "next/link";
+import {NotionSearch} from "./NotionSearch";
 
 export const RollList = () => {
   const {components, mapPageUrl} = useNotionContext()
@@ -60,6 +61,7 @@ export const PageHeader: React.FC<{
   const [scrollStyles, setScrollStyles] = useState(false)
   const [scrollTopWidth, setScrollTopWidth] = useState(0)
   const [scrollTopWidthFlag, setScrollTopWidthFlag] = useState(false)
+  const [searchFlag, setSearchFlag] = useState(false)
   const handleScroll = () => {
     setScrollTopWidthFlag(true)
     if (document.documentElement.scrollTop > 60) {
@@ -75,6 +77,7 @@ export const PageHeader: React.FC<{
         document.documentElement.clientHeight)
     )
   }
+
   const backTop = () => {
     setScrollStyles(false)
     const anchorElement = document.getElementById('main-container') // 须要定位看到的锚点元素
@@ -126,7 +129,8 @@ export const PageHeader: React.FC<{
                 : <Breadcrumbs block={block} rootOnly={false}/>}
             </div>
           </div>
-          <div className={styles.searchBox}>
+
+          <div className={styles.searchBox} onClick={()=>setSearchFlag(true)}>
             <i
               className='fa fa-search iconfont js-toggle-search icon-search'
             />
@@ -143,6 +147,7 @@ export const PageHeader: React.FC<{
       <button className={styles.mCdTop} title='Go to top' onClick={backTop}>
         <i className='fa fa-chevron-up' aria-hidden='true'/>
       </button>
+      <NotionSearch block={block} isOpenSearch={searchFlag} onChangeOpenSearch={setSearchFlag}/>
     </div>
   )
 }

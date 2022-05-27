@@ -13,6 +13,14 @@ yarn dev
 yarn add posthog-js
 
 
+problem
+
+The Serverless Function exceeds the maximum size limit of 50mb
+
+use .vercelignore
+
+# 自定义的Search不要跟react-notion-x重名.
+
 
 ```
 

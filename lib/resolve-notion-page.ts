@@ -2,7 +2,7 @@ import { parsePageId } from 'notion-utils'
 import { ExtendedRecordMap } from 'notion-types'
 
 import * as acl from './acl'
-import { pageUrlOverrides, pageUrlAdditions, environment, site } from './config'
+import {pageUrlOverrides, pageUrlAdditions, environment, site, isRedisEnabled} from './config'
 import { db } from './db'
 import { getPage } from './notion'
 import { getSiteMap } from './get-site-map'
@@ -10,7 +10,11 @@ import { getSiteMap } from './get-site-map'
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string
   let recordMap: ExtendedRecordMap
-  let browseTotal = 0
+  let browseTotal=0
+  if (isRedisEnabled) {
+    browseTotal = await db.get("browse")
+  }
+  browseTotal = browseTotal+1
   if (rawPageId && rawPageId !== 'index') {
     pageId = parsePageId(rawPageId)
 
@@ -34,7 +38,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       try {
         // check if the database has a cached mapping of this URI to page ID
         pageId = await db.get(cacheKey)
-        browseTotal = await db.get("browse")
         console.log(`redis get "${cacheKey}"`, pageId)
       } catch (err) {
         // ignore redis errors
@@ -80,7 +83,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     }
   } else {
     pageId = site.rootNotionPageId
-    browseTotal += 1
     console.log(site)
     recordMap = await getPage(pageId)
   }

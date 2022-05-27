@@ -10,6 +10,8 @@
 .notion {
   --notion-max-width: 720px;
   --notion-header-height: 54px;
+  font-size: 14px;
+  font-family: 'Noto Serif SC','Source Han Serif SC','Source Han Serif',source-han-serif-sc,'PT Serif','SongTi SC','MicroSoft Yahei',Georgia,serif;
 }
 
 .notion-page {
@@ -335,8 +337,9 @@
 /* if you don't want rounded page icon images, remove this */
 .notion-page-icon-hero.notion-page-icon-image {
   border-radius: 50%;
-  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.24);
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.24);
 }
+
 .notion-page-icon-hero.notion-page-icon-image span,
 .notion-page-icon-hero.notion-page-icon-image img {
   border-radius: 50%;
@@ -365,7 +368,7 @@
   display: none;
 }
 
-.breadcrumbs{
+.breadcrumbs {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -427,7 +430,7 @@
   color: var(--fg-color-2);
 }
 
-.notion-collection-card-size-large img{
+.notion-collection-card-size-large img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -435,6 +438,135 @@
   pointer-events: none;
   transition: all .6s;
 }
+
 .notion-collection-card-size-large:hover img {
   transform: scale(1.1)
+}
+
+/*search*/
+.search-form--modal {
+  transition: visibility .25s ease, opacity .25s ease;
+  overflow: hidden;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.search-form--modal .search-form__inner p {
+  padding-left: 24px;
+}
+
+.search-form i {
+  font-size: 2rem;
+  line-height: 1;
+  color: #ddd;
+  position: absolute;
+  bottom: 15px;
+  margin-top: -16px;
+  left: 16px;
+}
+
+.search-form .search_close {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: 0 0;
+  top: 20px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.search_close:before {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.search_close:after {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.search_close:after, .search_close:before {
+  background-color: #222;
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 2px;
+  top: 17px;
+  left: 2px;
+}
+
+.search-form.is-visible {
+  visibility: visible;
+  opacity: .99;
+  -webkit-animation: elastic .5s;
+  animation: elastic .5s;
+  background-image: url(/images/iloli.gif);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+.search-form--modal .search-form__inner {
+  max-width: 640px;
+  padding: 0 20px;
+  margin: auto;
+  text-align: left;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  height: 285px;
+  top: 0;
+  bottom: 0;
+}
+
+.search-form input {
+  transition: background 1s;
+  font-size: 1.5rem;
+  background: #fff;
+  padding: 12px 24px 12px 64px;
+  width: 100%;
+  outline: 0;
+  border-radius: 50px;
+  box-sizing: border-box;
+}
+
+.search-form div {
+  position: relative;
+}
+
+@-webkit-keyframes elastic {
+  0% {
+    transform: scale(0)
+  }
+  55% {
+    transform: scale(1)
+  }
+  70% {
+    transform: scale(.98)
+  }
+  100% {
+    transform: scale(1)
+  }
+}
+
+@keyframes elastic {
+  0% {
+    transform: scale(0)
+  }
+  55% {
+    transform: scale(1)
+  }
+  70% {
+    transform: scale(.98)
+  }
+  100% {
+    transform: scale(1)
+  }
 }
