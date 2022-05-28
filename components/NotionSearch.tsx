@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as types from "../lib/types";
-import {useState} from "react";
+import {useEffect, useMemo, useState} from "react";
+import {debounce} from "lodash";
 import {searchNotion} from "../lib/search-notion";
 import * as config from '../lib/config'
 
@@ -14,25 +15,23 @@ export const NotionSearch: React.FC<{
   let [searchError, setSearchError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const onChangeQuery = (e) => {
-    const query = e.target.value;
-    setQuery(query)
-    if (!query.trim()) {
-      setSearchError(null)
-      setSearchResult(null)
-      setIsLoading(false)
-    } else {
-    }
-  };
-  const search = () => {
+  const changeHandler = (value) => {
+    if (!value) return
+    setQuery(value)
     const result = searchNotion({
-      query:'vue',
-      ancestorId: config.rootNotionPageId,
+        query,
+        ancestorId: config.rootNotionPageId,
     });
-    console.log(result)
+    console.log(value)
+  };
 
-  }
+  const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 300), []);
 
+  useEffect(()=>{
+    return()=>{
+      debouncedChangeHandler.cancel();
+    }
+  })
 
   return (
     <div
@@ -40,15 +39,14 @@ export const NotionSearch: React.FC<{
       <div className="search-form__inner">
 
         <div>
-          <p className="micro mb-" onClick={search}>输入后按回车搜索 ...</p>
+          <p className="micro mb-" >输入后按回车搜索 ...</p>
           <i className="fa fa-search iconfont icon-search"></i>
           <input
             className="text-input"
             type="search"
             name="keyword"
             placeholder="NotionSearch"
-            value={query}
-            onChange={onChangeQuery}
+            onChange={(e)=>debouncedChangeHandler(e.target.value)}
           />
         </div>
       </div>
