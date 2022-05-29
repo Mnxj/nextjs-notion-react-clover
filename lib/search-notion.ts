@@ -39,3 +39,46 @@ async function searchNotionImpl(
   //   })
   //   .json()
 }
+
+const __defProp = Object.defineProperty;
+const __getOwnPropSymbols = Object.getOwnPropertySymbols;
+const __hasOwnProp = Object.prototype.hasOwnProperty;
+const __propIsEnum = Object.prototype.propertyIsEnumerable;
+const __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, {
+  enumerable: true,
+  configurable: true,
+  writable: true,
+  value
+}) : obj[key] = value;
+
+export const  __spreadValues = (a, b) => {
+  let prop;
+  for (prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+
+
+export const mergeGrade = (results) =>{
+  if (!Array.isArray(results)) return []
+  const newResults = []
+  results.forEach(item => {
+    const index = newResults.findIndex(subItem => subItem.id === item.page.id )
+    if (index > -1) {
+      newResults[index].htmls.push(item.highlight.html)
+    } else {
+      newResults.push({
+        id: item.page.id,
+        title: item.title,
+        htmls: [item.highlight.html]
+      })
+    }
+  })
+  return newResults
+}

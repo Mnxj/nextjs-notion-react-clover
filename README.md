@@ -21,6 +21,23 @@ use .vercelignore
 
 # 自定义的Search不要跟react-notion-x重名.
 
+# input 截流防抖动
+  const changeHandler = (value) => {
+    if (!value) return
+    const result = searchNotion({
+        query:value,
+        ancestorId: config.rootNotionPageId,
+    });
+    console.log(value)
+  };
+
+  const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 300), []);
+
+  useEffect(()=>{
+    return()=>{
+      debouncedChangeHandler.cancel();
+    }
+  })
 
 ```
 

@@ -458,7 +458,7 @@
   opacity: 0;
 }
 
-.search-form--modal .search-form__inner p {
+.search-form--modal .notion-search p {
   padding-left: 24px;
 }
 
@@ -512,7 +512,7 @@
   background-position: bottom right;
 }
 
-.search-form--modal .search-form__inner {
+.search-form--modal .notion-search {
   max-width: 640px;
   padding: 0 20px;
   margin: auto;
@@ -524,6 +524,12 @@
   height: 285px;
   top: 0;
   bottom: 0;
+}
+
+.notion-search {
+  box-shadow: none;
+  margin: 15% auto auto auto !important;
+  height: auto!important;
 }
 
 .search-form input {
@@ -539,6 +545,14 @@
 
 .search-form div {
   position: relative;
+}
+img.notion-page-icon {
+  width: 30px;
+  max-width: none;
+}
+
+.notion-search .resultsPane {
+  height: 70%;
 }
 
 @-webkit-keyframes elastic {
