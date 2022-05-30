@@ -9,12 +9,15 @@ import cs from 'classnames'
 import Link from "next/link";
 import {NotionSearch} from "./NotionSearch";
 
-export const RollList = () => {
+export const RollList = ({status}:{status:boolean}) => {
   const {components, mapPageUrl} = useNotionContext()
   return (
     <ul>
       {navigationLinks
         ?.map((link, index) => {
+          if (link.is_mobile&&link.is_mobile !==status){
+            return null
+          }
           if (!link.pageId && !link.url) {
             return null
           }
@@ -132,13 +135,13 @@ export const PageHeader: React.FC<{
 
           <div className={styles.searchBox} onClick={()=>setSearchFlag(true)}>
             <i
-              className='fa fa-search iconfont js-toggle-search icon-search'
+              className='fa fa-search icon-search'
             />
           </div>
           <div className={styles.lowerContainer}>
             <div className={styles.lower}>
               <nav>
-                <RollList/>
+                <RollList status={false}/>
               </nav>
             </div>
           </div>
@@ -147,7 +150,10 @@ export const PageHeader: React.FC<{
       <button className={styles.mCdTop} title='Go to top' onClick={backTop}>
         <i className='fa fa-chevron-up' aria-hidden='true'/>
       </button>
-      <NotionSearch block={block} isOpenSearch={searchFlag} onChangeOpenSearch={setSearchFlag}/>
+      <div className={searchFlag ? 'search-form search-form--modal is-visible' : 'search-form search-form--modal'}>
+          <NotionSearch />
+          <div className='search_close' onClick={() => setSearchFlag(false)}/>
+      </div>
     </div>
   )
 }

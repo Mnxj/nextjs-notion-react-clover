@@ -11,7 +11,7 @@ import * as config from 'lib/config'
 import { getSiteMap } from 'lib/get-site-map'
 import { getCanonicalPageUrl } from 'lib/map-page-url'
 import { getSocialImageUrl } from 'lib/get-social-image-url'
-
+const Feed = () =>null
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
     res.statusCode = 405
@@ -96,4 +96,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return { props: {} }
 }
 
-export default () => null
+export default Feed

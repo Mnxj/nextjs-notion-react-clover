@@ -37,6 +37,7 @@ export interface NavigationLink {
   span_class?:string
   i_class?:string
   url?: string
+  is_mobile?:boolean
 }
 
 export const siteConfig = (config: SiteConfig): SiteConfig => {

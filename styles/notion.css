@@ -442,7 +442,10 @@
 .notion-collection-card-size-large:hover img {
   transform: scale(1.1)
 }
-
+/*aside title*/
+.notion-aside .notion-aside-table-of-contents-header{
+  opacity: 0;
+}
 /*search*/
 .search-form--modal {
   transition: visibility .25s ease, opacity .25s ease;

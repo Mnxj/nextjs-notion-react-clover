@@ -943,30 +943,14 @@
 
 
 /*font style*/
-
-
-.iconfont {
-  font-family: iconfont, serif;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-broadcast:before {
-  content: "\e681";
-}
-
-.icon-search:before {
-  content: "\e90d";
-}
-
-
-.iconfont.js-toggle-search.icon-search {
+.icon-search {
   color: #666;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 26px!important;
   transition: all .3s ease-in-out
+}
+.icon-search:hover {
+  color: orange;
 }
 
 /* prism theme adjustments */
