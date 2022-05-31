@@ -67,8 +67,8 @@ export const NotionSearch = () => {
     <div className='notion-search'>
       <div>
         <p className='micro mb-'>输入后按回车搜索 ...</p>
-        {isLoading ? <i className='fa fa-spinner fa-spin fa-3x fa-fw'></i> :
-          <i className='fa fa-search icon-search'></i>}
+        {isLoading ? <i className='iconfont icon-loading2 loading'></i> :
+          <i className='iconfont icon-search'></i>}
         <input
           className='text-input'
           type='search'

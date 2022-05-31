@@ -11,7 +11,6 @@ import 'prismjs/themes/prism-coy.css'
 import '/styles/global.css'
 import '/styles/notion.css'
 import '/styles/prism-theme.css'
-import '/styles/font-awesome.min.css'
 import '/styles/load-animation.css'
 
 import * as React from 'react'

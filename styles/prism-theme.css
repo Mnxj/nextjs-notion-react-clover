@@ -946,11 +946,26 @@
 .icon-search {
   color: #666;
   cursor: pointer;
-  font-size: 26px!important;
+  font-size: 26px !important;
   transition: all .3s ease-in-out
 }
+
 .icon-search:hover {
   color: orange;
+}
+
+.iconfont.icon-loading2.loading {
+  width: 1.28571429em;
+  text-align: center;
+  -webkit-animation: icon-loading 2s infinite linear;
+  animation: icon-loading 2s infinite linear
+}
+
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 
 /* prism theme adjustments */
@@ -966,6 +981,7 @@
   background-color: rgba(17, 24, 39, 1);
   border-color: rgba(55, 65, 81, 1);
 }
+
 .notion code {
   color: rgba(31, 41, 55, 1);
   border: 0 none !important;
@@ -973,6 +989,7 @@
   background: none !important;
   padding: 0 !important;
 }
+
 [data-theme='dark'] .notion code {
   color: rgba(229, 231, 235, 1);
 }
@@ -994,20 +1011,25 @@
 .token.prolog {
   color: rgba(55, 65, 81, 1);
 }
+
 .token.comment {
   color: #5b9b4c;
 }
+
 [data-theme='dark'] .token.cdata,
 [data-theme='dark'] .token.doctype,
 [data-theme='dark'] .token.prolog {
   color: rgba(209, 213, 219, 1);
 }
+
 .token.punctuation {
   color: rgba(55, 65, 81, 1);
 }
+
 [data-theme='dark'] .token.punctuation {
   color: rgba(209, 213, 219, 1);
 }
+
 .token.boolean,
 .token.constant,
 .token.deleted,
@@ -1017,6 +1039,7 @@
 .token.tag {
   color: rgba(16, 185, 129, 1);
 }
+
 .token.attr-name,
 .token.builtin,
 .token.char,
@@ -1025,6 +1048,7 @@
 .token.string {
   color: rgba(139, 92, 246, 1);
 }
+
 .language-css .token.string,
 .style .token.string,
 .token.entity,
@@ -1032,35 +1056,43 @@
 .token.url {
   color: rgba(245, 158, 11, 1);
 }
+
 .token.atrule,
 .token.attr-value,
 .token.keyword {
   color: rgba(59, 130, 246, 1);
 }
+
 .token.class-name,
 .token.function {
   color: rgba(236, 72, 153, 1);
 }
+
 .token.important,
 .token.regex,
 .token.variable {
   color: rgba(245, 158, 11, 1);
 }
+
 code[class*='language-'],
 pre[class*='language-'] {
   color: rgba(31, 41, 55, 1);
 }
+
 [data-theme='dark'] code[class*='language-'],
 [data-theme='dark'] pre[class*='language-'] {
   color: rgba(249, 250, 251, 1);
 }
+
 pre::-webkit-scrollbar {
   display: none;
 }
+
 pre {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .token.operator,
 .token.entity,
 .token.url,
@@ -1077,4 +1109,26 @@ pre[class*='language-'] > code {
 pre[class*='language-']:before,
 pre[class*='language-']:after {
   display: none !important;
+}
+
+@-webkit-keyframes icon-loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg)
+  }
+}
+
+@keyframes icon-loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg)
+  }
 }

@@ -66,25 +66,25 @@ export default siteConfig({
       title: 'Tags',
       pageId: 'f1199d37579b41cbabfc0b5174f4256a',
       span_class: 'faa-parent animated-hover',
-      i_class: 'fa fa-list-ul faa-vertical'
+      i_class: 'iconfont icon-tags1 faa-vertical'
     },
     {
       title: 'Friend',
       pageId: 'f1199d37579b41cbabfc0b5174f4256a',
       span_class: 'faa-parent animated-hover',
-      i_class: 'fa fa-link faa-shake'
+      i_class: 'iconfont icon-link1 faa-shake'
     },
     {
       title: 'rssHub',
       pageId: '33c88aee456746ca8736b8f63eb4e02e',
       span_class: 'faa-parent animated-hover',
-      i_class: 'fa fa-rss faa-shake'
+      i_class: 'iconfont icon-rss faa-shake'
     },
     {
       title: 'About',
       pageId: '4ee34fae1079479d846aed48fac40af0',
       span_class: 'faa-parent animated-hover',
-      i_class: 'fa fa-leaf faa-wrench'
+      i_class: 'iconfont icon-leaf faa-wrench'
     }
   ]
 })

@@ -31,7 +31,7 @@ export const RollList = ({status}:{status:boolean}) => {
                 <li>
                   <span className={link.span_class}>
                     <i className={link.i_class}/>
-                    {link.title}
+                    &nbsp;{link.title}
                   </span>
                 </li>
               </components.PageLink>
@@ -46,7 +46,7 @@ export const RollList = ({status}:{status:boolean}) => {
                 <li>
                   <span className={link.span_class}>
                     <i className={link.i_class}/>
-                    {link.title}
+                    &nbsp;{link.title}
                   </span>
                 </li>
               </components.Link>
@@ -134,9 +134,7 @@ export const PageHeader: React.FC<{
           </div>
 
           <div className={styles.searchBox} onClick={()=>setSearchFlag(true)}>
-            <i
-              className='fa fa-search icon-search'
-            />
+            <i className='iconfont icon-search'></i>
           </div>
           <div className={styles.lowerContainer}>
             <div className={styles.lower}>

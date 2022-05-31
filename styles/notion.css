@@ -552,6 +552,10 @@ img.notion-page-icon {
   width: 30px;
   max-width: none;
 }
+.iconfont {
+  text-rendering: auto;
+  display: inline-block;
+}
 
 .notion-search .resultsPane {
   height: 70%;
