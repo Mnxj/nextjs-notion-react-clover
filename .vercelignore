@@ -13,6 +13,6 @@ scripts/
 .editorconfig
 LICENSE
 README
-api/social-image
+api/social-image/
 *.log
 
