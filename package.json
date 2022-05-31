@@ -6,9 +6,6 @@
   "author": "clover",
   "repository": "mnxj/react-notion-clover",
   "license": "Apache 2.0",
-  "engines": {
-    "node": ">=12"
-  },
   "scripts": {
     "dev": "next",
     "build": "next build",
