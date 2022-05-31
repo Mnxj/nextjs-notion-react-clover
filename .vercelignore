@@ -1,18 +1,10 @@
 # -*- mode: gitignore; -*-
 # Optimize speed/size of deployments by not uploading those files
 !docs/
-!.env
-
 .vscode/
 .idea/
-.github/
 node_modules/
-cypress/
-coverage/
-scripts/
-.editorconfig
 LICENSE
 README
 api/
-*.log
 
