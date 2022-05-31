@@ -10,6 +10,8 @@ export interface SiteConfig {
   description?: string
   language?: string
 
+  infoMessage?:string
+
   logo?: string
 
   github?: string

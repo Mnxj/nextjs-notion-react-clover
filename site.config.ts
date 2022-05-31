@@ -13,6 +13,10 @@ export default siteConfig({
   domain: 'clover-blog.cn',
   author: '幸いです',
 
+  // update notice info message
+
+  infoMessage:'正在努力更新中...',
+
   // This is logo
 
   logo: '/images/log.svg',
@@ -72,7 +76,7 @@ export default siteConfig({
     },
     {
       title: 'rssHub',
-      pageId: 'fbca42d53f4c48fcb6cc315a8ed3775b',
+      pageId: '33c88aee456746ca8736b8f63eb4e02e',
       span_class: 'faa-parent animated-hover',
       i_class: 'fa fa-rss faa-shake'
     },

@@ -17,7 +17,6 @@
 }
 
 
-
 .settings,
 .social {
   user-select: none;
@@ -907,6 +906,38 @@
     top: -1px;
     left: -1px;
     clip: rect(31px, 9999px, 149px, 0)
+  }
+}
+
+/*info*/
+.notice {
+  padding: 20px;
+  border: 1px dashed #e6e6e6;
+  color: #969696;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  background: #fbfbfb50;
+  margin-top: 20px;
+  border-radius: 10px
+}
+
+.notice i {
+  float: left;
+  color: #999;
+  font-size: 18px;
+  padding-right: 10px
+}
+
+.notice-content {
+  display: initial;
+  vertical-align: middle
+}
+
+@media (max-width: 860px) {
+  .notice {
+    margin-top: 40px;
+    margin-bottom: 20px
   }
 }
 

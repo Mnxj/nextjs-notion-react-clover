@@ -46,7 +46,8 @@ export const environment = process.env.NODE_ENV || 'development'
 export const isDev = environment === 'development'
 
 // general site config
-export const logo: string = getSiteConfig('logo')
+export const logo: string | null = getSiteConfig('logo',null)
+export const infoMessage: string | null =getSiteConfig('infoMessage',null)
 export const name: string = getSiteConfig('name')
 export const author: string = getSiteConfig('author')
 export const domain: string = getSiteConfig('domain')
