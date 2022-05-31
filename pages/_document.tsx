@@ -19,9 +19,6 @@ export default class MyDocument extends Document {
             <link
               href="/fonts/fontawesome-webfont.woff"
             />
-            <link
-              href="/fonts/fontawesome-webfont.woff2"
-            />
 
             <link rel='shortcut icon' href='/favicon.ico' />
             <link

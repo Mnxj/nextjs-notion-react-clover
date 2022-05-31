@@ -43,15 +43,11 @@ export const NotionSearch = () => {
         if (!result2.page.id) {
           return;
         }
-
         if ((_b = result2.highlight) == null ? void 0 : _b.text) {
           result2.highlight.html = result2.highlight.text.replace(/<gzkNfoUU>/gi, '<b style="color: rgba(245, 158, 11, 1)">').replace(/<\/gzkNfoUU>/gi, '</b>');
         }
         return result2;
       }).filter(Boolean);
-      // const searchResultsMap = results.reduce((map, result2) => __spreadProps(__spreadValues({}, map), {
-      //   [result2.page.id]: result2
-      // }), {});
       searchResults.results = Object.values(mergeGrade(results));
       setSearchResult(searchResults)
     }).catch((error) => {
