@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {debounce, isEmpty} from 'lodash';
 import {__spreadValues, mergeGrade, searchNotion} from '../lib/search-notion';
 import * as config from '../lib/config';
@@ -14,7 +14,7 @@ export const NotionSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {components, mapPageUrl} = useNotionContext();
 
-  const changeHandler = (value) => {
+  const changeHandler = useCallback((value) => {
 
     setIsLoading(false);
     if (!value.trim()) {
@@ -55,7 +55,7 @@ export const NotionSearch = () => {
     }).catch((error) => {
       changeEmpty(error);
     }).finally(() => setIsLoading(false));
-  };
+  },[]);
 
   const changeEmpty = (error) => {
     setSearchResult(null);
