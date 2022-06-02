@@ -5,5 +5,5 @@
 node_modules/
 LICENSE
 README
+!api/search-notion/
 api/
-!api/search-notion
