@@ -7,6 +7,8 @@ node_modules/
 LICENSE
 README
 
+!yarn.lock
+!package.json
 
 # api
 api/social-image/**
