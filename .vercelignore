@@ -1,5 +1,6 @@
 # -*- mode: gitignore; -*-
 # Optimize speed/size of deployments by not uploading those files
+*
 .vscode/
 .idea/
 node_modules/
