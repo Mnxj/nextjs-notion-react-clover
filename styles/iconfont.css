@@ -1,32 +1,16 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2460329 */
-  src: url('//at.alicdn.com/t/font_2460329_xjonpr98t8a.woff2?t=1654166917347') format('woff2'),
-       url('//at.alicdn.com/t/font_2460329_xjonpr98t8a.woff?t=1654166917347') format('woff'),
-       url('//at.alicdn.com/t/font_2460329_xjonpr98t8a.ttf?t=1654166917347') format('truetype');
+  src: url('//at.alicdn.com/t/font_2460329_6j0is2valja.woff2?t=1654008662542') format('woff2'),
+       url('//at.alicdn.com/t/font_2460329_6j0is2valja.woff?t=1654008662542') format('woff'),
+       url('//at.alicdn.com/t/font_2460329_6j0is2valja.ttf?t=1654008662542') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: 'iconfont', serif !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-down:before {
-  content: "\e742";
-}
-
-.icon-top1:before {
-  content: "\e743";
-}
-
-.icon-wangyiyun11:before {
-  content: "\e608";
-}
-
-.icon-wangyiyun2:before {
-  content: "\e740";
 }
 
 .icon-load-a:before {
