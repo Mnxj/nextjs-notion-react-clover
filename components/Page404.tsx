@@ -3,13 +3,12 @@ import * as types from 'lib/types'
 import { PageHead } from './PageHead'
 
 import styles from './styles.module.css'
-import Layout from './Layout';
 
 export const Page404: React.FC<types.PageProps> = ({ site, pageId, error }) => {
   const title = site?.name || 'Notion Page Not Found'
 
   return (
-    <Layout>
+    <>
       <PageHead site={site} title={title} />
 
       <div className={styles.container}>
@@ -34,6 +33,6 @@ export const Page404: React.FC<types.PageProps> = ({ site, pageId, error }) => {
           />
         </main>
       </div>
-    </Layout>
+    </>
   )
 }

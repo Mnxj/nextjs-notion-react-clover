@@ -2,13 +2,12 @@ import * as React from 'react'
 import { PageHead } from './PageHead'
 
 import styles from './styles.module.css'
-import Layout from './Layout';
 
 export const ErrorPage: React.FC<{ statusCode: number }> = ({ statusCode }) => {
   const title = 'Error'
 
   return (
-    <Layout>
+    <>
       <PageHead title={title} />
 
       <div className={styles.container}>
@@ -20,6 +19,6 @@ export const ErrorPage: React.FC<{ statusCode: number }> = ({ statusCode }) => {
           <img src='/images/error.png' alt='Error' className={styles.errorImage} />
         </main>
       </div>
-    </Layout>
+    </>
   )
 }
