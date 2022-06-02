@@ -5,6 +5,5 @@
 node_modules/
 LICENSE
 README
-!api
-!api/search-notion
-api/social-image/**
+!api/notion/**
+api/post/**

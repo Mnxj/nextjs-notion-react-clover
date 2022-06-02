@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next'
-import { host } from 'lib/config'
+import {api, host} from 'lib/config';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (process.env.VERCEL_ENV === 'production') {
     res.write(`User-agent: *
 Allow: /
-Disallow: /api/search-notion
+Disallow: ${api.searchNotion}
 
 Sitemap: ${host}/sitemap.xml
 `)

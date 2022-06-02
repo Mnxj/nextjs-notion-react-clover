@@ -128,8 +128,8 @@ export const host = isDev ? `http://localhost:${port}` : `https://${domain}`
 export const apiBaseUrl = `/api`
 
 export const api = {
-  searchNotion: `${apiBaseUrl}/search-notion`,
-  getSocialImage: `${apiBaseUrl}/social-image`
+  searchNotion: `${apiBaseUrl}/notion/search-notion`,
+  getSocialImage: `${apiBaseUrl}/post/social-image`
 }
 
 // ----------------------------------------------------------------------------
