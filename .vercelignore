@@ -5,6 +5,4 @@
 node_modules/
 LICENSE
 README
-!api
-!api/search-notion/**
 api/social-image/**
