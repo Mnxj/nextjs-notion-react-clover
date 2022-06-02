@@ -1,9 +1,9 @@
 # -*- mode: gitignore; -*-
 # Optimize speed/size of deployments by not uploading those files
-!docs/
 .vscode/
 .idea/
 node_modules/
 LICENSE
 README
-api/image/
+api/
+!api/search-notion
