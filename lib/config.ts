@@ -129,7 +129,7 @@ export const apiBaseUrl = `/api`
 
 export const api = {
   searchNotion: `${apiBaseUrl}/search-notion`,
-  getSocialImage: `${apiBaseUrl}/social-image`
+  getSocialImage: `${apiBaseUrl}/image/social-image`
 }
 
 // ----------------------------------------------------------------------------
