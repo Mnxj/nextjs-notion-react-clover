@@ -63,3 +63,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## problem
+1、图片资源太大
+引入`.vercelignore`加入api的过滤
+2、加入`.vercelignore`过滤会过滤掉缓存的页面
+需要对api下面加一层，单独对图片目录过滤
