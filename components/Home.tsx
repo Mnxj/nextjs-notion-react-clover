@@ -85,11 +85,11 @@ export const HomeTop = () => {
                 <div className={(openVideo || playVideo) ? styles.videoStu : styles.videoStu0}>已暂停 ...</div>
             </div>
             <div className={styles.homeTopDown} onClick={gotoContext}>
-                <span><i className='fa fa-chevron-down' aria-hidden='true'/></span>
+                <span><i className='iconfont icon-down' aria-hidden='true'/></span>
             </div>
         </div>
         <div className={styles.notice}>
-          <i className='fa fa-volume-up'/>
+          <i className='iconfont icon-top1'/>
           <div className='notice-content'>{config.infoMessage}</div>
         </div>
       </>
