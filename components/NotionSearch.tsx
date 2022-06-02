@@ -1,29 +1,28 @@
 import * as React from 'react';
 import {useEffect, useMemo, useState} from 'react';
-import {debounce} from 'lodash';
+import {debounce, isEmpty} from 'lodash';
 import {__spreadValues, mergeGrade, searchNotion} from '../lib/search-notion';
-import * as config from '../lib/config'
+import * as config from '../lib/config';
 import {getBlockParentPage, getBlockTitle} from 'notion-utils';
-import {defaultPageIcon} from "../lib/config";
-import cs from "classnames";
-import {useNotionContext} from "react-notion-x";
+import {defaultPageIcon} from '../lib/config';
+import cs from 'classnames';
+import {useNotionContext} from 'react-notion-x';
 
 export const NotionSearch = () => {
-  const [searchResult, setSearchResult] = useState(null)
-  const [searchError, setSearchError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const {components, mapPageUrl} = useNotionContext()
+  const [searchResult, setSearchResult] = useState(null);
+  const [searchError, setSearchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const {components, mapPageUrl} = useNotionContext();
 
   const changeHandler = (value) => {
 
-    setIsLoading(false)
+    setIsLoading(false);
     if (!value.trim()) {
-      setSearchResult(null)
-      setSearchError(null)
-      return
+      changeEmpty(null);
+      return;
     }
-    setIsLoading(true)
-    searchNotion({query: value, ancestorId: config.rootNotionPageId,}).then((result) => {
+    setIsLoading(true);
+    searchNotion({query: value, ancestorId: config.rootNotionPageId}).then((result) => {
       let searchResults = __spreadValues({}, result);
       const results = searchResults.results.map((result2) => {
         let _a, _b;
@@ -49,26 +48,34 @@ export const NotionSearch = () => {
         return result2;
       }).filter(Boolean);
       searchResults.results = Object.values(mergeGrade(results));
-      setSearchResult(searchResults)
+      setSearchResult(searchResults);
+      if (searchResults.total === 0) {
+        changeEmpty('error');
+      }
     }).catch((error) => {
-      setSearchError(error)
-    }).finally(() => setIsLoading(false))
+      changeEmpty(error);
+    }).finally(() => setIsLoading(false));
   };
 
-  const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 300), []);
+  const changeEmpty = (error) => {
+    setSearchResult(null);
+    setSearchError(error);
+  };
+
+  const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 300), [changeHandler]);
 
   useEffect(() => {
     return () => {
       debouncedChangeHandler.cancel();
-    }
-  })
+    };
+  });
 
   return (
     <div className='notion-search'>
       <div>
         <p className='micro mb-'>输入后按回车搜索 ...</p>
-        {isLoading ? <i className='iconfont icon-loading2 loading'></i> :
-          <i className='iconfont icon-search'></i>}
+        {isLoading ? <i className='iconfont icon-loading2 loading'/> :
+          <i className='iconfont icon-search'/>}
         <input
           className='text-input'
           type='search'
@@ -77,43 +84,45 @@ export const NotionSearch = () => {
           onChange={(e) => debouncedChangeHandler(e.target.value)}
         />
       </div>
-      {!searchResult ? null : <>
-        <div className="resultsPane">
-          {searchResult.results.map((result) => {
-            return (
-              <components.PageLink
-                href={mapPageUrl(result.id, searchResult.recordMap)}
-                key={result.id}
-                className={cs("result", "notion-page-link")}
-              >
-                    <span className="notion-page-title">
-                      <div className="notion-page-icon-inline notion-page-icon-image">
-                        <img className="notion-page-title-icon notion-page-icon" src={defaultPageIcon}
-                             alt={result.title} loading="lazy" decoding="async"/>
+      {isEmpty(searchResult) ?
+        null
+        : <>
+          <div className='resultsPane'>
+            {searchResult.results.map((result) => {
+              return (
+                <components.PageLink
+                  href={mapPageUrl(result.id, searchResult.recordMap)}
+                  key={result.id}
+                  className={cs('result', 'notion-page-link')}
+                >
+                    <span className='notion-page-title'>
+                      <div className='notion-page-icon-inline notion-page-icon-image'>
+                        <img className='notion-page-title-icon notion-page-icon' src={defaultPageIcon}
+                             alt={result.title} loading='lazy' decoding='async'/>
                       </div>
-                      <span className="notion-page-title-text">{result.title}</span>
+                      <span className='notion-page-title-text'>{result.title}</span>
                     </span>
-                {result.htmls.map((html: string) => {
-                  return (<div className="notion-search-result-highlight" key={html}
-                               dangerouslySetInnerHTML={{__html: html}}/>)
-                })
-                }
-              </components.PageLink>
-            )
-          })
-          }
-        </div>
-        <footer className="resultsFooter">
-          <div><span
-            className="resultsCount">{searchResult?.total}</span> {searchResult?.total === 1 ? " result" : " results"}
+                  {result.htmls.map((html: string) => {
+                    return (<div className='notion-search-result-highlight' key={html}
+                                 dangerouslySetInnerHTML={{__html: html}}/>);
+                  })
+                  }
+                </components.PageLink>
+              );
+            })
+            }
           </div>
-        </footer>
-      </>
+          <footer className='resultsFooter'>
+            <div><span
+              className='resultsCount'>{searchResult?.total}</span> {searchResult?.total === 1 ? ' result' : ' results'}
+            </div>
+          </footer>
+        </>
       }
-      {!searchError ? null : <div className='noResultsPane'>
+      {isEmpty(searchError) ? null : <div className='noResultsPane'>
         <div className='noResults'>No results</div>
         <div className='noResultsDetail'>Try different search terms</div>
       </div>}
     </div>
-  )
-}
+  );
+};
