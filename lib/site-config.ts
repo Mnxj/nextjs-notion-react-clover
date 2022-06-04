@@ -3,6 +3,8 @@ import * as types from './types'
 export interface SiteConfig {
   rootNotionPageId: string
   rootNotionSpaceId?: string
+  articlesPageId?:string
+  tagsPageId?:string
 
   name: string
   domain: string
@@ -18,7 +20,6 @@ export interface SiteConfig {
   zhihu?: string
 
   defaultPageIcon?: string | null
-  defaultPageCover?: string | null
   defaultPageCoverPosition?: number | null
 
   isPreviewImageSupportEnabled?: boolean

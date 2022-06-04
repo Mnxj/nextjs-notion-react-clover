@@ -8,6 +8,12 @@ export default siteConfig({
   // (this should be a Notion ID; see the docs for how to extract this)
   rootNotionSpaceId: null,
 
+  // articles view page
+  articlesPageId: '8c7683ab51b9488e900c5a2b4be49981',
+
+  // tags pageId
+  tagsPageId: '9b1dd1f12c414b52ab9ae97ac5202205',
+
   // basic site info (required)
   name: 'clover',
   domain: 'clover-blog.cn',
@@ -31,7 +37,6 @@ export default siteConfig({
   // default notion icon and cover images for site-wide consistency (optional)
   // page-specific values will override these site-wide defaults
   defaultPageIcon: '/favicon.svg',
-  defaultPageCover: null,
   defaultPageCoverPosition: 0.5,
 
   // whether or not to enable support for LQIP preview images (optional)
@@ -57,14 +62,14 @@ export default siteConfig({
   navigationLinks: [
     {
       title: 'Search',
-      url:'/Search',
+      url:'/search',
       span_class: 'faa-parent animated-hover',
       i_class: 'fa fa-search faa-shake',
       is_mobile:true,
     },
     {
       title: 'Tags',
-      pageId: 'f1199d37579b41cbabfc0b5174f4256a',
+      url:'/tags',
       span_class: 'faa-parent animated-hover',
       i_class: 'iconfont icon-tags1 faa-vertical'
     },
@@ -75,8 +80,8 @@ export default siteConfig({
       i_class: 'iconfont icon-link1 faa-shake'
     },
     {
-      title: 'rssHub',
-      pageId: '33c88aee456746ca8736b8f63eb4e02e',
+      title: 'RSS',
+      url:'/feed',
       span_class: 'faa-parent animated-hover',
       i_class: 'iconfont icon-rss faa-shake'
     },

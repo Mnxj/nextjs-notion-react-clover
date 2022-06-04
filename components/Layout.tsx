@@ -4,8 +4,10 @@ import { useState } from 'react'
 
 import styles from './styles.module.css'
 import * as config from "../lib/config";
+import {Footer} from './Footer';
+import {PageHeader} from './Header';
 
-const Layout = ({ children }: any) => {
+const Layout = ({ children,browseTotal }: any) => {
   const [openNav, setOpenNav] = useState(false)
   return (
     <div>
@@ -24,7 +26,9 @@ const Layout = ({ children }: any) => {
             </h1>
           </div>
         </div>
+        <PageHeader block={null}/>
         {children}
+        <Footer browse={browseTotal}/>
       </section>
       <Sidebar openNav={openNav} />
     </div>

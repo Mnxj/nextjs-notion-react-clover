@@ -89,7 +89,7 @@ export const HomeTop = () => {
             </div>
         </div>
         <div className={styles.notice}>
-          <i className='iconfont icon-top1'/>
+          <i className='iconfont icon-notice'/>
           <div className='notice-content'>{config.infoMessage}</div>
         </div>
       </>

@@ -1,4 +1,5 @@
 import { ExtendedRecordMap, PageMap } from 'notion-types'
+import {articlesPageId} from './config';
 
 export * from 'notion-types'
 
@@ -13,6 +14,8 @@ export interface PageProps {
   pageId?: string
   browseTotal?:number
   error?: PageError
+  tagsPage?: boolean
+  propertyToFilterName?:string
 }
 
 export interface Site {
@@ -21,6 +24,7 @@ export interface Site {
 
   rootNotionPageId: string
   rootNotionSpaceId: string
+  articlesPageId:string
 
   // settings
   html?: string

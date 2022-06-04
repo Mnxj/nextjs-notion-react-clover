@@ -30,6 +30,10 @@ export const rootNotionSpaceId: string | null = parsePageId(
   {uuid: true}
 )
 
+export const articlesPageId: string | null = parsePageId(getSiteConfig('articlesPageId', null),{uuid: true})
+
+export const tagsPageId: string | null = parsePageId(getSiteConfig('tagsPageId', null),{uuid: true})
+
 export const pageUrlOverrides = cleanPageUrlMap(
   getSiteConfig('pageUrlOverrides', {}) || {},
   {label: 'pageUrlOverrides'}
@@ -63,10 +67,7 @@ export const defaultPageIcon: string | null = getSiteConfig(
   'defaultPageIcon',
   null
 )
-export const defaultPageCover: string | null = getSiteConfig(
-  'defaultPageCover',
-  null
-)
+
 export const defaultPageCoverPosition: number = getSiteConfig(
   'defaultPageCoverPosition',
   0.5
@@ -139,6 +140,7 @@ export const site: Site = {
   name,
   rootNotionPageId,
   rootNotionSpaceId,
+  articlesPageId,
   description
 }
 

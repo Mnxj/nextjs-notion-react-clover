@@ -1,33 +1,33 @@
-import * as React from 'react'
-import {domain} from 'lib/config'
-import {resolveNotionPage} from 'lib/resolve-notion-page'
-import {NotionPage} from 'components'
-import Layout from "../components/Layout";
-import {db} from "../lib/db";
-import * as types from "../lib/types";
-import {HomeTop} from "../components/Home";
+import * as React from 'react';
+import {domain} from 'lib/config';
+import {resolveNotionPage} from 'lib/resolve-notion-page';
+import {NotionPage} from 'components';
+import Layout from '../components/Layout';
+import {db} from '../lib/db';
+import * as types from '../lib/types';
+import {HomeTop} from '../components/Home';
 
 export const getStaticProps = async () => {
   try {
 
-    const props = await resolveNotionPage(domain) as types.PageProps
-    await db.set("browse", props.browseTotal)
-    return {props, revalidate: 10}
+    const props = await resolveNotionPage(domain) as types.PageProps;
+    await db.set('browse', props.browseTotal);
+    return {props, revalidate: 60};
   } catch (err) {
-    console.error('page error', domain, err)
+    console.error('page error', domain, err);
 
     // we don't want to publish the error version of this page, so
     // let next.js know explicitly that incremental SSG failed
-    throw err
+    throw err;
   }
-}
+};
 
 export default function NotionDomainPage(props) {
-  return <Layout>
+  return <Layout browseTotal={props.browseTotal}>
     <HomeTop/>
-    <div id="notion-page">
+    <div id='notion-page'>
       <NotionPage  {...props} />
     </div>
-  </Layout>
+  </Layout>;
 
 }

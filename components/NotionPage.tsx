@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
+import {eq, isEmpty} from 'lodash';
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import cs from 'classnames'
@@ -11,7 +12,7 @@ import {PageBlock} from 'notion-types'
 import {NotionRenderer} from 'react-notion-x'
 
 // utils
-import {getBlockTitle, getPageProperty, formatDate} from 'notion-utils'
+import {getBlockTitle, getPageProperty, formatDate, normalizeTitle} from 'notion-utils';
 import {mapPageUrl, getCanonicalPageUrl} from 'lib/map-page-url'
 import {mapImageUrl} from 'lib/map-image-url'
 import {searchNotion} from 'lib/search-notion'
@@ -139,13 +140,31 @@ const propertyTextValue = (
 
   return defaultFn()
 }
+const propertySelectValue = (
+  { schema, value, key, pageHeader },
+  defaultFn: () => React.ReactNode
+) => {
+  value = normalizeTitle(value)
+
+  if (pageHeader && schema.type === 'multi_select' && value) {
+    return (
+      <Link href={`/tags/${value}`} key={key}>
+        <a>{defaultFn()}</a>
+      </Link>
+    )
+  }
+
+  return defaultFn()
+}
 
 export const NotionPage: React.FC<types.PageProps> = ({
                                                         site,
                                                         recordMap,
                                                         error,
                                                         pageId,
-                                                        browseTotal
+                                                        browseTotal,
+                                                        tagsPage,
+                                                        propertyToFilterName
                                                       }) => {
   const router = useRouter()
   const lite = useSearchParam('lite')
@@ -162,7 +181,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
       Header: PageHeader,
       propertyLastEditedTimeValue,
       propertyTextValue,
-      propertyDateValue
+      propertyDateValue,
+      propertySelectValue
     }),
     []
   )
@@ -205,7 +225,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
     return <Page404 site={site} pageId={pageId} error={error} />
   }
 
-  const title = getBlockTitle(block, recordMap) || site.name
+  const name = getBlockTitle(block, recordMap) || site.name
+  const title =
+    tagsPage && propertyToFilterName ? `"${propertyToFilterName}"` : name
 
   console.log('notion page', {
     isDev: config.isDev,
@@ -228,8 +250,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-    (block as PageBlock).format?.page_cover ||
-    config.defaultPageCover,
+    (block as PageBlock).format?.page_cover,
     block
   )
 
@@ -254,7 +275,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
       <NotionRenderer
         bodyClassName={cs(
           styles.notion,
-          pageId === site.rootNotionPageId && 'index-page'
+          pageId === site.rootNotionPageId && 'index-page',
+          tagsPage && 'tags-page'
         )}
         components={components}
         recordMap={recordMap}
@@ -264,11 +286,12 @@ export const NotionPage: React.FC<types.PageProps> = ({
         previewImages={!!recordMap.preview_images}
         showCollectionViewDropdown={false}
         showTableOfContents={true}
+        linkTableTitleProperties={false}
         minTableOfContentsItems={minTableOfContentsItems}
         defaultPageCoverPosition={config.defaultPageCoverPosition}
         mapPageUrl={siteMapPageUrl}
         mapImageUrl={mapImageUrl}
-        pageTitle={title === author ? '' : title}
+        pageTitle={!eq(name, author) ? title : ''}
         searchNotion={config.isSearchEnabled ? searchNotion : null}
         pageAside={pageAside}
         footer={footer}

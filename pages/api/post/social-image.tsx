@@ -49,8 +49,7 @@ export default withOGImage<'query', 'id'>({
       const title = getBlockTitle(block, recordMap) || config.name
       const image = mapImageUrl(
         getPageProperty<string>('Social Image', block, recordMap) ||
-          (block as PageBlock).format?.page_cover ||
-          config.defaultPageCover,
+          (block as PageBlock).format?.page_cover ,
         block
       )
 

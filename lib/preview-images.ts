@@ -5,7 +5,7 @@ import pMemoize from 'p-memoize'
 import { ExtendedRecordMap, PreviewImage, PreviewImageMap } from 'notion-types'
 import { getPageImageUrls, normalizeUrl } from 'notion-utils'
 
-import { defaultPageIcon, defaultPageCover } from './config'
+import { defaultPageIcon} from './config'
 import { db } from './db'
 import { mapImageUrl } from './map-image-url'
 
@@ -13,7 +13,7 @@ export async function getPreviewImageMap(
   recordMap: ExtendedRecordMap
 ): Promise<PreviewImageMap> {
   const urls: string[] = getPageImageUrls(recordMap, {mapImageUrl})
-    .concat([defaultPageIcon, defaultPageCover])
+    .concat([defaultPageIcon])
     .filter(Boolean)
 
   return Object.fromEntries(

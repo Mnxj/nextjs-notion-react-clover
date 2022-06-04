@@ -1,39 +1,37 @@
-import * as React from 'react'
-import * as types from 'lib/types'
-import { PageHead } from './PageHead'
+import * as React from 'react';
+import * as types from 'lib/types';
+import {PageHead} from './PageHead';
 
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 import Layout from './Layout';
 
-export const Page404: React.FC<types.PageProps> = ({ site, pageId, error }) => {
-  const title = site?.name || 'Notion Page Not Found'
+export const Page404: React.FC<types.PageProps> = ({site, pageId, error}) => {
+  const title = site?.name || 'Notion Page Not Found';
 
   return (
     <Layout>
-      <PageHead site={site} title={title} />
+      <PageHead site={site} title={title}/>
 
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <h1>Notion Page Not Found</h1>
+      <main className={styles.main}>
+        <h1>Notion Page Not Found</h1>
 
-          {error ? (
-            <p>{error.message}</p>
-          ) : (
-            pageId && (
-              <p>
-                Make sure that Notion page &quot;{pageId}&quot; is publicly
-                accessible.
-              </p>
-            )
-          )}
+        {error ? (
+          <p>{error.message}</p>
+        ) : (
+          pageId && (
+            <p>
+              Make sure that Notion page &quot;{pageId}&quot; is publicly
+              accessible.
+            </p>
+          )
+        )}
 
-          <img
-            src='/images/404.png'
-            alt='404 Not Found'
-            className={styles.errorImage}
-          />
-        </main>
-      </div>
+        <img
+          src='/images/404.png'
+          alt='404 Not Found'
+          className={styles.errorImage}
+        />
+      </main>
     </Layout>
-  )
-}
+  );
+};

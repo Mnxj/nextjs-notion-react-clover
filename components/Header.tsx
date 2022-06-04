@@ -8,6 +8,7 @@ import {Links, navigationLinks} from "../lib/config";
 import cs from 'classnames'
 import Link from "next/link";
 import {NotionSearch} from "./NotionSearch";
+import {isEmpty} from 'lodash';
 
 export const RollList = ({status}:{status:boolean}) => {
   const {components, mapPageUrl} = useNotionContext()
@@ -42,6 +43,7 @@ export const RollList = ({status}:{status:boolean}) => {
                 href={link.url}
                 key={index}
                 className={cs(styles.navLink, 'breadcrumb', 'button')}
+                target=''
               >
                 <li>
                   <span className={link.span_class}>
@@ -99,7 +101,6 @@ export const PageHeader: React.FC<{
       window.removeEventListener('scroll', handleScroll)
     }
   }, [scrollStyles, scrollTopWidth])
-  const blockId = block.id.replaceAll("-", "");
   return (
     <div id='main-header' className={styles.mainHeader}>
       <div
@@ -124,7 +125,7 @@ export const PageHeader: React.FC<{
                 alt='log'
               />
 
-              {Links.has(blockId) ? <div className="breadcrumbs">
+              {isEmpty(block)||Links.has(block.id.replaceAll("-", "")) ? <div className="breadcrumbs">
                   <Link href="/"><a className="breadcrumb">
                     <span className="title">{config.author}</span></a>
                   </Link>
@@ -134,7 +135,7 @@ export const PageHeader: React.FC<{
           </div>
 
           <div className={styles.searchBox} onClick={()=>setSearchFlag(true)}>
-            <i className='iconfont icon-search'></i>
+            <i className='iconfont icon-search'/>
           </div>
           <div className={styles.lowerContainer}>
             <div className={styles.lower}>
@@ -146,7 +147,7 @@ export const PageHeader: React.FC<{
         </div>
       </header>
       <button className={styles.mCdTop} title='Go to top' onClick={backTop}>
-        <i className='fa fa-chevron-up' aria-hidden='true'/>
+        <i className='iconfont icon-top1' aria-hidden='true'/>
       </button>
       <div className={searchFlag ? 'search-form search-form--modal is-visible' : 'search-form search-form--modal'}>
           <NotionSearch />

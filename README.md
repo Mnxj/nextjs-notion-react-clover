@@ -69,3 +69,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 引入`.vercelignore`加入api的过滤
 2、加入`.vercelignore`过滤会过滤掉缓存的页面
 需要对api下面加一层，单独对图片目录过滤
+3、<components.Link 使用url会跳转到新的页面
+因为转为a标签带有`target="_blank"` 改为`target=""·`
