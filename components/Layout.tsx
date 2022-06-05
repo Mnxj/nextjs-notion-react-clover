@@ -1,16 +1,17 @@
-import * as React from 'react'
-import { Sidebar } from './sidebar/Sidebar'
-import { useState } from 'react'
+import * as React from 'react';
 
 import styles from './styles.module.css'
 import * as config from "../lib/config";
 import {Footer} from './Footer';
 import {PageHeader} from './Header';
+import {useState} from 'react';
+import {Sidebar} from './sidebar/Sidebar';
 
-const Layout = ({ children,browseTotal }: any) => {
-  const [openNav, setOpenNav] = useState(false)
+const Layout = ({children, browseTotal, isNotionFooter}: any) => {
+  const [openNav, setOpenNav] = useState(false);
+
   return (
-    <div>
+    <>
       <section
         id='main-container'
         className={openNav ? styles.mainContainer : ''}
@@ -28,10 +29,10 @@ const Layout = ({ children,browseTotal }: any) => {
         </div>
         <PageHeader block={null}/>
         {children}
-        <Footer browse={browseTotal}/>
+        {isNotionFooter && <Footer browse={browseTotal}/>}
       </section>
       <Sidebar openNav={openNav} />
-    </div>
-  )
-}
-export default Layout
+    </>
+  );
+};
+export default Layout;

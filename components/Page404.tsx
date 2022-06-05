@@ -9,7 +9,7 @@ export const Page404: React.FC<types.PageProps> = ({site, pageId, error}) => {
   const title = site?.name || 'Notion Page Not Found';
 
   return (
-    <Layout>
+    <Layout isNotionFooter={true}>
       <PageHead site={site} title={title}/>
 
       <main className={styles.main}>

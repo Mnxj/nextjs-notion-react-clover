@@ -30,7 +30,7 @@ export const getStaticProps = async () => {
 };
 const Tags = (props) => {
   return (
-    <Layout>
+    <Layout isNotionFooter={true}>
       <div className='notion-page-scroller'>
         <div className='notion-page-cover-wrapper'>
         <span style={{
@@ -71,7 +71,7 @@ const Tags = (props) => {
                     margin: '0px',
                     padding: '0px'
                   }}/></span>
-          <img alt='about~me '
+          <img alt='tags'
                srcSet='/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F7de19ce8-e25c-424a-9cf0-a2a9ca6faa28%252F004630-16460667904dd2.jpeg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&amp;w=1920&amp;q=75 1x, /_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F7de19ce8-e25c-424a-9cf0-a2a9ca6faa28%252F004630-16460667904dd2.jpeg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&amp;w=3840&amp;q=75 2x'
                src='/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F7de19ce8-e25c-424a-9cf0-a2a9ca6faa28%252F004630-16460667904dd2.jpeg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&amp;w=3840&amp;q=75'
                decoding='async' data-nimg='intrinsic' className='notion-page-cover'

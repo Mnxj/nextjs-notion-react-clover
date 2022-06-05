@@ -523,6 +523,22 @@
   background-position: bottom right;
 }
 
+.search-form.is-mobile {
+  visibility: visible;
+  opacity: .99;
+  z-index: 0;
+  height: 100vh;
+  position: relative;
+  -webkit-animation: elastic .5s;
+  animation: elastic .5s;
+  background-image: url(/images/block.gif);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+.search-form.is-mobile .notion-search{
+  margin-top: 23%!important;
+}
+
 .search-form--modal .notion-search {
   max-width: 640px;
   padding: 0 20px;

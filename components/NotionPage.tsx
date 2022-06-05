@@ -29,6 +29,8 @@ import {PageHeader} from './Header'
 import {GitHubShareButton} from './GitHubShareButton'
 
 import styles from './styles.module.css'
+import Layout from './Layout';
+import {HomeTop} from './Home';
 
 
 // -----------------------------------------------------------------------------
@@ -261,7 +263,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
     config.description
 
   return (
-    <>
+    <Layout>
       <PageHead
         pageId={pageId}
         site={site}
@@ -270,7 +272,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         image={socialImage}
         url={canonicalPageUrl}
       />
-
+      {eq(name, author)&& <HomeTop/>}
 
       <NotionRenderer
         bodyClassName={cs(
@@ -298,6 +300,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
       />
 
       <GitHubShareButton/>
-    </>
+    </Layout>
   )
 }
