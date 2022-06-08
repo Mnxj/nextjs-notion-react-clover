@@ -3,7 +3,7 @@ import {NotionSearch} from '../components/NotionSearch';
 
 const Search = () => {
   return (
-    <Layout isNotionFooter={true}>
+    <Layout isNotNotionFooter={true}>
       <div className='search-form search-form--modal is-mobile'>
         <NotionSearch/>
       </div>

@@ -8,7 +8,7 @@ export const ErrorPage: React.FC<{ statusCode: number }> = ({ statusCode }) => {
   const title = 'Error'
 
   return (
-    <Layout isNotionFooter={true}>
+    <Layout isNotNotionFooter={true}>
       <PageHead title={title} />
 
       <div className={styles.container}>

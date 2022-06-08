@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {getPage} from '../lib/notion';
 import * as config from 'lib/config';
 import {ExtendedRecordMap} from 'notion-types';
@@ -30,7 +30,7 @@ export const getStaticProps = async () => {
 };
 const Tags = (props) => {
   return (
-    <Layout isNotionFooter={true}>
+    <Layout isNotNotionFooter={true}>
       <div className='notion-page-scroller'>
         <div className='notion-page-cover-wrapper'>
         <span style={{

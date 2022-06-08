@@ -7,7 +7,7 @@ import {PageHeader} from './Header';
 import {useState} from 'react';
 import {Sidebar} from './sidebar/Sidebar';
 
-const Layout = ({children, browseTotal, isNotionFooter}: any) => {
+const Layout = ({children, browseTotal, isNotNotionFooter}: any) => {
   const [openNav, setOpenNav] = useState(false);
 
   return (
@@ -29,7 +29,7 @@ const Layout = ({children, browseTotal, isNotionFooter}: any) => {
         </div>
         <PageHeader block={null}/>
         {children}
-        {isNotionFooter && <Footer browse={browseTotal}/>}
+        {isNotNotionFooter && <Footer browse={browseTotal}/>}
       </section>
       <Sidebar openNav={openNav} />
     </>
