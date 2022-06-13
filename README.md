@@ -71,3 +71,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 需要对api下面加一层，单独对图片目录过滤
 3、<components.Link 使用url会跳转到新的页面
 因为转为a标签带有`target="_blank"` 改为`target=""·`
+4、定时任务
+yarn add node-schedule

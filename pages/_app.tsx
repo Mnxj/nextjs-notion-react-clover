@@ -18,6 +18,7 @@ import * as Fathom from 'fathom-client'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
+import schedule from 'node-schedule'
 
 import { bootstrap } from 'lib/bootstrap-client'
 import {
@@ -60,6 +61,10 @@ export default function App({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', onRouteChangeComplete)
     }
   }, [router.events])
+
+  schedule.scheduleJob("1 * * * * *", function(){
+    console.log(1)
+  });
 
   return <Component {...pageProps} />
 }
