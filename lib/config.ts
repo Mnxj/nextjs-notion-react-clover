@@ -152,6 +152,7 @@ export const fathomConfig = fathomId
   : undefined
 
 export const posthogId = process.env.NEXT_PUBLIC_POSTHOG_ID
+export const notionId = process.env.NOTION_ID
 export const posthogConfig: posthog.Config = {
   api_host: 'https://app.posthog.com'
 }

@@ -1,5 +1,4 @@
 import { ExtendedRecordMap, PageMap } from 'notion-types'
-import {articlesPageId} from './config';
 
 export * from 'notion-types'
 

@@ -1,34 +1,16 @@
 import React from 'react';
-import {getPage} from '../lib/notion';
-import * as config from 'lib/config';
-import {ExtendedRecordMap} from 'notion-types';
-import {isEmpty, random} from 'lodash';
 import Layout from '../components/Layout';
-import Link from 'next/link';
-
+import {db} from '../lib/db';
 
 export const getStaticProps = async () => {
-  const recordMap = await getPage(config.articlesPageId) as ExtendedRecordMap;
-  let result;
-  for (let recordKey in recordMap['collection_query']) {
-    let value = recordMap['collection_query'][recordKey];
-    for (let queryKey in value[config.tagsPageId]) {
-      if (queryKey.startsWith('board_columns')) {
-        result = value[config.tagsPageId][queryKey];
-      }
-    }
-  }
-
-  const props = result['results'].filter(item => !isEmpty(item.value.value)).map(item => ({
-    key: String(item.value.value),
-    total: item.total
-  }));
+  const props = await db.get('created-time')
   return {
-    props: {...props},
+    props:{...props},
     revalidate: 60
   };
 };
-const Tags = (props) => {
+const Created = (props) => {
+  console.log(props)
   return (
     <Layout isNotNotionFooter={true}>
       <div className='notion-page-scroller'>
@@ -93,38 +75,10 @@ const Tags = (props) => {
                }}/>
         </span>
         </div>
-        <main
-          className='notion-page notion-page-has-cover notion-page-has-icon notion-page-has-text-icon notion-full-page'>
-          <h1 className='notion-title'>Tags</h1>
-          <div className='notion-collection-page-properties'>
-            <div className='notion-collection-row'/>
-          </div>
-          <div className='tag-contents'>
-            <div id='tags' className='container chip-container'>
-              <div className='card'>
-                <div className='card-content'>
-                  <div className='tag-chips'>
-                    {
-                      Object.keys(props).map(index => {
-                        return (
-                          <Link href={`/tags/${props[index].key}`} key={props[index].key}>
-                            <span className='chip' data-tagname={props[index].key}
-                              style={{backgroundColor: 'rgb(' + [random(40, 255), random(40, 255), random(40, 255)].join(',') + ')'}}>{props[index].key}
-                              <span className='tag-length'>{props[index].total}</span>
-                            </span>
-                          </Link>
-                        );
-                      })
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
+
       </div>
     </Layout>
   );
 
 };
-export default Tags;
+export default Created;
