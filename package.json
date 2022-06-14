@@ -29,7 +29,6 @@
     "lqip-modern": "^1.2.0",
     "next": "12.1.6",
     "next-api-og-image": "^2.2.1",
-    "node-schedule": "^2.1.0",
     "notion-client": "^6.12.0",
     "notion-types": "^6.11.0",
     "notion-utils": "^6.11.0",

@@ -74,7 +74,7 @@ export default siteConfig({
       i_class: 'iconfont icon-tags1 faa-vertical'
     },
     {
-      title: 'Created',
+      title: 'Date',
       url:'/created',
       span_class: 'faa-parent animated-hover',
       i_class: 'iconfont icon-tags1 faa-vertical'

@@ -6,15 +6,12 @@ import {pageUrlOverrides, pageUrlAdditions, environment, site, isRedisEnabled} f
 import {db} from './db';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
+import {getBrowseTotal} from './hander-redis';
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
   let recordMap: ExtendedRecordMap;
-  let browseTotal = 0;
-  if (isRedisEnabled) {
-    browseTotal = await db.get('browse');
-  }
-  browseTotal = browseTotal + 1;
+  let browseTotal = await getBrowseTotal();
   if (rawPageId && rawPageId !== 'index') {
     pageId = parsePageId(rawPageId);
 

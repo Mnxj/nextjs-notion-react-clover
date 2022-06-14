@@ -24,17 +24,18 @@ export const getNotionIds = async () => {
       let monthYear = created_time.getFullYear() + '-' + getMonthOrDay(created_time.getMonth());
       let monthDay = getMonthOrDay(created_time.getMonth()) + '-' + getMonthOrDay(created_time.getDay());
       if (!results[monthYear]) {
-        results[monthYear] = {children: []};
+        results[monthYear] = {flag: false, children: []};
       }
-      results[monthYear].children.push({
-        id:result['id'],
-        name:result['properties']['Name']['title'][0]['plain_text'],
-        date:monthDay
-      });
+      results[monthYear].children.push(
+        {
+          id: result['id'],
+          name: result['properties']['Name']['title'][0]['plain_text'],
+          date: monthDay
+        });
     });
     if (!isEmpty(results)) {
       try {
-        await db.set('created-time', results);
+        await db.set('created-time', results, 8.64e7);
       } catch (err) {
         console.warn(`redis error :`, err.message);
       }

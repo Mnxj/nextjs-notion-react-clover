@@ -1158,7 +1158,7 @@ pre[class*='language-']:after {
   margin: 1rem auto 0.5rem;
   max-width: 850px;
   text-align: center;
-  padding-top: 1.5rem;
+  padding-top: 2rem;
 }
 
 .chip-container .chip {
@@ -1198,4 +1198,114 @@ pre[class*='language-']:after {
   .chip-container {
     margin-top: -60px;
   }
+
+  .site-content {
+    width: 800px;
+  }
+}
+
+/*created */
+#content {
+  -webkit-animation: main 1s;
+  animation: main 1s;
+}
+
+.site-content {
+  max-width: 800px;
+  padding: 0 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent !important;
+}
+
+.site-content:before {
+  content: "";
+  display: table;
+  table-layout: fixed;
+}
+
+.hentry {
+  margin: 0 0 1.5em;
+}
+
+#archives-temp {
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+#archives-content {
+  position: relative;
+  border-left: 1px dashed #f5f5f5;
+}
+
+.ar-time {
+  position: absolute;
+  left: -18px;
+  margin-top: 3px;
+}
+
+.ar-time i {
+  padding: 10px;
+  border-radius: 100px;
+  background: orange;
+  color: #fff;
+}
+
+.icon-log:before {
+  content: "\e609";
+}
+
+#archives-temp h3 {
+  letter-spacing: 2px;
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 400;
+  color: orange;
+  margin-left: 30px;
+  margin-top: 50px;
+}
+
+span.ar-circle {
+  height: 10px;
+  width: 10px;
+  background: orange;
+  display: inline-block;
+  position: absolute;
+  left: -5px;
+  margin-top: 22px;
+  border-radius: 100px;
+}
+
+.arrow-left-ar {
+  width: 0;
+  height: 0;
+  display: block;
+  float: left;
+  margin-top: 10px;
+  border-left: 20px solid transparent;
+  border-bottom: 20px solid #f5f5f5;
+  margin-left: 11px;
+}
+
+.brick {
+  margin-left: 30px;
+}
+
+.brick a {
+  color: #7d7d7d;
+  padding: 20px;
+  background: #f5f5f5;
+  margin-bottom: 20px;
+  display: block;
+  letter-spacing: 0;
+}
+
+span.time {
+  float: right;
+  color: #cacaca;
+}
+
+#archives-temp h3:hover {
+  color: #ddd;
+  cursor: pointer
 }
