@@ -18,7 +18,7 @@ export const getStaticProps = async () => {
 
 const Search = (props) => {
   return (
-    <Layout isNotNotionFooter={true} browseTotal={props.browseTotal}>
+    <Layout isNotNotionFooter={true} browseTotal={props.browseTotal} title='Search'>
       <div className='search-form search-form--modal is-mobile'>
         <NotionSearch/>
       </div>

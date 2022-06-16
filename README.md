@@ -73,3 +73,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 因为转为a标签带有`target="_blank"` 改为`target=""·`
 4、定时任务
 yarn add node-schedule
+5、valine 评论插件
+npm install valine --save
+
+
+ReferenceError: document is not defined

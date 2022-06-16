@@ -81,7 +81,7 @@ export default siteConfig({
     },
     {
       title: 'Friend',
-      pageId: 'f1199d37579b41cbabfc0b5174f4256a',
+      pageId: '13686de168794011a4c43f41fc833c89',
       span_class: 'faa-parent animated-hover',
       i_class: 'iconfont icon-link1 faa-shake'
     },

@@ -2,8 +2,9 @@ import Layout from './Layout';
 import React from 'react';
 
 export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
+
   return (
-    <Layout browseTotal={browseTotal} isNotNotionFooter={true}>
+    <Layout browseTotal={browseTotal} isNotNotionFooter={true} title={LayoutTitle}>
       <div className='notion-page-scroller'>
         <div className='notion-page-cover-wrapper'>
         <span style={{

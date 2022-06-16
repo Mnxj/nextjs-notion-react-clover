@@ -212,9 +212,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const pageAside = React.useMemo(
     () => (
-      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
+      <PageAside pageId={pageId}  isBlogPost={isBlogPost} />
     ),
-    [block, recordMap, isBlogPost]
+    [pageId, isBlogPost]
   )
 
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal])
