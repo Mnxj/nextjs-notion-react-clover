@@ -75,6 +75,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 yarn add node-schedule
 5、valine 评论插件
 npm install valine --save
+6、友链的实现方案。
 
-
-ReferenceError: document is not defined

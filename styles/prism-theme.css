@@ -1,5 +1,5 @@
 /*!
- * font-awesome-animation - v0.3.0
+ * fonts-awesome-animation - v0.3.0
  * @url https://github.com/l-lin/font-awesome-animation
  * License: MIT
  */
@@ -942,7 +942,7 @@
 }
 
 
-/*font style*/
+/*fonts style*/
 .icon-search {
   color: #666;
   cursor: pointer;
@@ -1245,8 +1245,8 @@ pre[class*='language-']:after {
 }
 
 .ar-time i {
-  padding: 10px;
-  border-radius: 100px;
+  padding: 3px 6px;
+  border-radius: 50%;
   background: orange;
   color: #fff;
 }

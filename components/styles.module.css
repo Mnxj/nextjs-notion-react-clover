@@ -99,8 +99,13 @@
 }
 
 /*layout*/
-.openInvalidNav, .openNav {
+.openInvalidNav,
+.openNav,
+.headerContainer .lowerContainer,
+.mCdTop,
+.bgInvalidVideo {
   display: none;
+
 }
 
 @media (max-width: 860px) {
@@ -286,10 +291,6 @@
   color: #666;
 }
 
-.headerContainer .lowerContainer {
-  display: none;
-}
-
 .headerContainer:hover .lowerContainer, .headerWhiteContainer .lowerContainer {
   display: block;
 }
@@ -394,7 +395,6 @@
   border-radius: 12px;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
   transition: box-shadow .2s ease;
-  display: none;
 }
 
 .mCdTop:hover {
@@ -710,10 +710,6 @@
   min-width: 99.999%;
   min-height: 550px;
   z-index: 0;
-}
-
-.bgInvalidVideo {
-  display: none;
 }
 
 .videoRun, .videoPause {

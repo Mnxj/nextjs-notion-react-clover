@@ -47,7 +47,7 @@ const Created = (props) => {
               {Object.keys(notionIds).map(key => {
                 return (
                   <div className='archive-title' key={key}>
-                    <span className='ar-time'><i className='iconfont icon-log'/></span>
+                    <span className='ar-time'><i className='iconfont icon-calendar1'/></span>
                     <h3 onClick={()=>changeNotionIds(key)}>{key}</h3>
                     {
                       notionIds[key].flag &&

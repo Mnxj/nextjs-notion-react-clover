@@ -28,7 +28,7 @@ export default siteConfig({
   logo: '/images/log.svg',
 
   // open graph metadata (optional)
-  description: '快速响应的前端页面',
+  description: '鼓捣在0和1之间的二货',
 
   // social usernames (optional)
   zhihu: 'sao-di-seng-78-11',
@@ -77,7 +77,7 @@ export default siteConfig({
       title: 'Date',
       url:'/created',
       span_class: 'faa-parent animated-hover',
-      i_class: 'iconfont icon-tags1 faa-vertical'
+      i_class: 'iconfont icon-shounaxiang faa-vertical'
     },
     {
       title: 'Friend',
