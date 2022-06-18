@@ -3,8 +3,10 @@ import * as types from './types'
 export interface SiteConfig {
   rootNotionPageId: string
   rootNotionSpaceId?: string
+  friendDatabasePageId?: string
   articlesPageId?:string
   tagsPageId?:string
+  friendPageId?:string
 
   name: string
   domain: string
@@ -18,6 +20,9 @@ export interface SiteConfig {
 
   github?: string
   zhihu?: string
+  bilibili?: string
+  wangyiyun?: string
+  csdn?: string
 
   defaultPageIcon?: string | null
   defaultPageCoverPosition?: number | null

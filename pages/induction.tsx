@@ -10,13 +10,13 @@ import {useNotionContext} from 'react-notion-x';
 export const getStaticProps = async () => {
 
   try {
+    let notionIds
     if (isRedisEnabled) {
-      const dateCache = await db.get('date-cache');
-      if (isEmpty(dateCache)) {
-        await getNotionIds();
+      notionIds = await db.get('induction');
+      if (isEmpty(notionIds)) {
+        notionIds = await getNotionIds();
       }
     }
-    const notionIds = await db.get('induction');
     const browseTotal = await getBrowseTotal();
     const props = {notionIds, browseTotal};
     return {
@@ -24,8 +24,8 @@ export const getStaticProps = async () => {
       revalidate: 60
     };
   } catch (err) {
-    // ignore redis errors
     console.warn(`redis error get `, err.message);
+    throw err
   }
 };
 const Induction = (props) => {

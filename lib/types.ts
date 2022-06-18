@@ -14,7 +14,8 @@ export interface PageProps {
   browseTotal?:number
   error?: PageError
   tagsPage?: boolean
-  propertyToFilterName?:string
+  friends?: Array<any>
+  propertyToFilterName?: string
 }
 
 export interface Site {

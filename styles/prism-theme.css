@@ -1199,6 +1199,10 @@ pre[class*='language-']:after {
     margin-top: -60px;
   }
 
+  .notion-page {
+    max-width: 800px;
+  }
+
   .site-content {
     width: 800px;
   }
@@ -1308,4 +1312,14 @@ span.time {
 #archives-temp h3:hover {
   color: #ddd;
   cursor: pointer
+}
+
+/*图片预加载*/
+.loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+}
+.loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
 }

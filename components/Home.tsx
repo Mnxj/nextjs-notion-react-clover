@@ -1,6 +1,8 @@
 import styles from './styles.module.css'
 import {useRef, useState} from 'react';
-import {infoMessage} from '../lib/config';
+import {bilibili, csdn, description, github, infoMessage, name, wangyiyun, zhihu} from '../lib/config';
+import ProgressiveImg from './ProgressiveImg';
+import {centerBg} from '../lib/fonts';
 
 export const HomeTop = () => {
     const [openVideo, setOpenVideo] = useState(false);
@@ -35,31 +37,31 @@ export const HomeTop = () => {
     return (
       <>
         <div className={styles.homeTop}>
-            <figure className='center-bg'>
+            <figure className={styles.centerBg}>
                 <div className={openVideo?styles.centerContainerInvalid:styles.centerContainer}>
-                    <h1 className={styles.centerTitle} data-text='Clover'>Clover</h1>
+                    <h1 className={styles.centerTitle} data-text={name}>{name}</h1>
                     <div className={styles.centerInfo}>
                         <p>
-                            <i className='fa fa-quote-left'/> 鼓捣在0和1之间的二货<i className='fa fa-quote-right'/>
+                            <i className='fa fa-quote-left'/>{description}<i className='fa fa-quote-right'/>
                         </p>
                         <div className={styles.topSocial}>
                             <li id='bg-pre'>
                                 <img className={styles.bgPre} src='/images/next-b.svg' alt='next-p'/>
                             </li>
                             <li>
-                                <a href='https://github.com/Mnxj' rel='noreferrer'  target='_blank'><img src='/images/github.png' alt='github'/></a>
+                                <a href={`https://github.com/${github}`} rel='noreferrer'  target='_blank'><img src='/images/github.png' alt='github'/></a>
                             </li>
                             <li>
-                                <a href='https://space.bilibili.com/57933284' rel='noreferrer'  target='_blank' title='bilibili'><img src='/images/bilibili.png' alt='bilibili'/></a>
+                                <a href={`https://space.bilibili.com/${bilibili}`} rel='noreferrer'  target='_blank' title='bilibili'><img src='/images/bilibili.png' alt='bilibili'/></a>
                             </li>
                             <li>
-                                <a href='https://music.163.com/#/user/home?id=394247655' rel='noreferrer'  target='_blank' title='CloudMusic'><img src='/images/wangyiyun.png' alt='wangyiyun'/></a>
+                                <a href={`https://music.163.com/#/user/home?id=${wangyiyun}`} rel='noreferrer'  target='_blank' title='CloudMusic'><img src='/images/wangyiyun.png' alt='wangyiyun'/></a>
                             </li>
                             <li>
-                                <a href='https://www.zhihu.com/people/sao-di-seng-78-11' rel='noreferrer'  target='_blank' title='知乎'><img src='/images/zhihu.png' alt='zhihu'/></a>
+                                <a href={`https://www.zhihu.com/people/${zhihu}`} rel='noreferrer'  target='_blank' title='知乎'><img src='/images/zhihu.png' alt='zhihu'/></a>
                             </li>
                             <li>
-                                <a href='https://blog.csdn.net/Adim12?spm=1000.2115.3001.5343' rel='noreferrer'  target='_blank' title='CSDN'><img src='/images/csdn.png' alt='csdn'/></a>
+                                <a href={`https://blog.csdn.net/${csdn}`} rel='noreferrer'  target='_blank' title='CSDN'><img src='/images/csdn.png' alt='csdn'/></a>
                             </li>
                             <li id='bg-next'>
                                 <img src='/images/next-b.svg' alt='next-b'/>
@@ -68,6 +70,7 @@ export const HomeTop = () => {
 
                     </div>
                 </div>
+                <ProgressiveImg src={centerBg} alt='home' style={{ width: '100%',height: '100%',position: 'absolute',top: '0px'}}/>
             </figure>
             <div className={styles.videoContainer}>
                 <video
@@ -89,8 +92,10 @@ export const HomeTop = () => {
             </div>
         </div>
         <div className={styles.notice}>
-          <i className='iconfont icon-notice'/>
-          <div className='notice-content'>{infoMessage}</div>
+          <div className={styles.noticeCenter}>
+            <i className='iconfont icon-notice'/>
+            <div className='notice-content'>{infoMessage}</div>
+          </div>
         </div>
       </>
     );

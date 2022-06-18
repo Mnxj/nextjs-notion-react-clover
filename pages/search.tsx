@@ -11,8 +11,8 @@ export const getStaticProps = async () => {
       revalidate: 60
     };
   } catch (err) {
-    // ignore redis errors
     console.warn(`redis error get `, err.message);
+    throw err
   }
 };
 

@@ -1,14 +1,14 @@
-import {articlesPageId, notionId} from './config';
-
+import {articlesPageId, friendDatabasePageId, notionId} from './config';
 import {Client} from '@notionhq/client';
 import {isEmpty} from 'lodash';
 import {db} from './db';
-const notion = new Client({auth: notionId});
 
+const notion = new Client({auth: notionId});
+let results = {};
 
 export const getNotionIds = async () => {
+
   await (async () => {
-    let results = {};
     const response = await notion.databases.query({
       database_id: articlesPageId,
       filter: {
@@ -33,14 +33,43 @@ export const getNotionIds = async () => {
           date: monthDay
         });
     });
-    if (!isEmpty(results)) {
-      try {
-        await db.set('induction', results, 8.64e7);
-      } catch (err) {
-        console.warn(`redis error :`, err.message);
-      }
-    }
+    await setResults(results, 'induction')
   })().catch(err => console.warn(`notion query :`, err.message));
+  return results;
 };
+
+export const getFriends = async () => {
+  (async () => {
+    const response = await notion.databases.query({
+      database_id: friendDatabasePageId,
+      "sorts": [
+        {
+          "timestamp": "created_time",
+          "direction": "ascending"
+        },
+      ]
+    });
+    response['results'].forEach(result=>{
+      const properties = result['properties']
+      if(!properties.Invalid.checkbox){
+        const link = properties.Link.rich_text[0].plain_text
+        results[link]= { icon: properties.Icon.rich_text[0].plain_text, name: properties.Name.title[0].plain_text, description: properties.Description.rich_text[0].plain_text}
+      }
+    });
+    await setResults(results, 'friend')
+  })().catch(err => console.warn(`notion query :`, err.message));
+  return results;
+}
+
+const setResults = async (results, key) => {
+  if (!isEmpty(results)) {
+    try {
+      await db.set(key, results, 8.64e7);
+    } catch (err) {
+      console.warn(`redis error :`, err.message);
+    }
+  }
+}
+
 
 const getMonthOrDay = (created_time: number) => parseInt(String(created_time)) < 10 ? '0' + created_time : created_time;

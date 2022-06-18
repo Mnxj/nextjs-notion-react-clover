@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import {eq, isEmpty} from 'lodash';
+import {eq} from 'lodash';
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import cs from 'classnames'
@@ -166,6 +166,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
                                                         pageId,
                                                         browseTotal,
                                                         tagsPage,
+                                                        friends,
                                                         propertyToFilterName
                                                       }) => {
   const router = useRouter()
@@ -212,9 +213,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const pageAside = React.useMemo(
     () => (
-      <PageAside pageId={pageId}  isBlogPost={isBlogPost} />
+      <PageAside pageId={pageId} friends={friends}  isBlogPost={isBlogPost} />
     ),
-    [pageId, isBlogPost]
+    [pageId, friends, isBlogPost]
   )
 
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal])

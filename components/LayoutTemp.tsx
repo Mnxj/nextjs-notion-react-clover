@@ -1,5 +1,6 @@
 import Layout from './Layout';
 import React from 'react';
+import ProgressiveImg from './ProgressiveImg';
 
 export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
 
@@ -21,50 +22,23 @@ export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
           position: 'relative',
           maxWidth: '100%'
         }}>
-          <span style={{
+          <ProgressiveImg src={String(`${url}w=3840&q=75`)} className='notion-page-cover' style={{
+            position: 'absolute',
+            inset: '0px',
             boxSizing: 'border-box',
-            display: 'block',
-            width: 'initial',
-            height: 'initial',
-            background: 'none',
-            opacity: 1,
-            border: '0px',
-            margin: '0px',
             padding: '0px',
-            maxWidth: '100%'
-          }}><img alt='' aria-hidden='true'
-                  src='/images/orange.svg'
-                  style={{
-                    display: 'block',
-                    maxWidth: '100%',
-                    width: 'initial',
-                    height: 'initial',
-                    background: 'none',
-                    opacity: 1,
-                    border: '0px',
-                    margin: '0px',
-                    padding: '0px'
-                  }}/></span>
-          <img alt='tags'
-               srcSet={String(`${url}w=1980&q=75 1x, ${url}w=3840&q=75 2x`)}
-               src={String(`${url}w=3840&q=75`)}
-               decoding='async' data-nimg='intrinsic' className='notion-page-cover'
-               style={{
-                 position: 'absolute',
-                 inset: '0px',
-                 boxSizing: 'border-box',
-                 padding: '0px',
-                 border: 'none',
-                 margin: 'auto',
-                 display: 'block',
-                 width: '0px',
-                 height: '0px',
-                 minWidth: '100%',
-                 maxWidth: '100%',
-                 minHeight: '100%',
-                 maxHeight: '100%',
-                 objectPosition: ' center 50%'
-               }}/>
+            border: 'none',
+            margin: 'auto',
+            display: 'block',
+            width: '0px',
+            height: '0px',
+            minWidth: '100%',
+            maxWidth: '100%',
+            objectFit: 'cover',
+            minHeight: '100%',
+            maxHeight: '100%',
+            objectPosition: ' center 50%'
+          }} alt='tags' />
         </span>
         </div>
         <main

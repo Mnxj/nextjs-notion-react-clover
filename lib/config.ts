@@ -34,6 +34,10 @@ export const articlesPageId: string | null = parsePageId(getSiteConfig('articles
 
 export const tagsPageId: string | null = parsePageId(getSiteConfig('tagsPageId', null),{uuid: true})
 
+export const friendDatabasePageId: string | null = parsePageId(getSiteConfig('friendDatabasePageId', null),{uuid: true})
+
+export const friendPageId: string | null = parsePageId(getSiteConfig('friendPageId', null),{uuid: true})
+
 export const pageUrlOverrides = cleanPageUrlMap(
   getSiteConfig('pageUrlOverrides', {}) || {},
   {label: 'pageUrlOverrides'}
@@ -61,6 +65,9 @@ export const language: string = getSiteConfig('language', 'en')
 // social accounts
 export const github: string | null = getSiteConfig('github', null)
 export const zhihu: string | null = getSiteConfig('zhihu', null)
+export const bilibili: string | null = getSiteConfig('bilibili', null)
+export const wangyiyun: string | null = getSiteConfig('wangyiyun', null)
+export const csdn: string | null = getSiteConfig('csdn', null)
 
 // default notion values for site-wide consistency (optional; may be overridden on a per-page basis)
 export const defaultPageIcon: string | null = getSiteConfig(

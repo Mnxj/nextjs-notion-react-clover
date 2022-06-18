@@ -14,8 +14,13 @@ export default siteConfig({
   // tags pageId
   tagsPageId: '9b1dd1f12c414b52ab9ae97ac5202205',
 
+  // friendDatabasePageId is  Friend Link database address pageId
+  // friendPageId show friendDatabasePageId
+  friendDatabasePageId: '960362aa01f843a0bcd30c41c2e8300e',
+  friendPageId: '13686de168794011a4c43f41fc833c89',
+
   // basic site info (required)
-  name: 'clover',
+  name: 'Clover',
   domain: 'clover-blog.cn',
   author: '幸いです',
 
@@ -33,13 +38,16 @@ export default siteConfig({
   // social usernames (optional)
   zhihu: 'sao-di-seng-78-11',
   github: 'Mnxj',
+  bilibili: '57933284',
+  wangyiyun: '394247655',
+  csdn: 'Adim12',
 
   // default notion icon and cover images for site-wide consistency (optional)
   // page-specific values will override these site-wide defaults
   defaultPageIcon: '/favicon.svg',
   defaultPageCoverPosition: 0.5,
 
-  inductionIcon: '/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252Fc6c12aa7-8d2e-4714-8b7f-d10388fd7388%252F4kcc0eea3ccfd-d6bd-3cd0-8e41-63ba599fd301.jpg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&w=1920&q=75 1x, /_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252Fc6c12aa7-8d2e-4714-8b7f-d10388fd7388%252F4kcc0eea3ccfd-d6bd-3cd0-8e41-63ba599fd301.jpg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&',
+  inductionIcon: '/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252Fc6c12aa7-8d2e-4714-8b7f-d10388fd7388%252F4kcc0eea3ccfd-d6bd-3cd0-8e41-63ba599fd301.jpg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&',
   tagsIcon: '/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F7de19ce8-e25c-424a-9cf0-a2a9ca6faa28%252F004630-16460667904dd2.jpeg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&',
 
   // whether or not to enable support for LQIP preview images (optional)

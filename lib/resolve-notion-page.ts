@@ -2,19 +2,27 @@ import {parsePageId} from 'notion-utils';
 import {ExtendedRecordMap} from 'notion-types';
 
 import * as acl from './acl';
-import {pageUrlOverrides, pageUrlAdditions, environment, site, isRedisEnabled} from './config';
+import {pageUrlOverrides, pageUrlAdditions, environment, site, friendPageId, isRedisEnabled} from './config';
 import {db} from './db';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
 import {getBrowseTotal} from './hander-redis';
+import {eq, isEmpty} from 'lodash';
+import {getFriends} from './get-created-notions';
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
   let recordMap: ExtendedRecordMap;
   let browseTotal = await getBrowseTotal();
+  let friends = null
   if (rawPageId && rawPageId !== 'index') {
     pageId = parsePageId(rawPageId);
-
+    if (isRedisEnabled && eq(pageId,friendPageId)) {
+      friends = await db.get('friend');
+      if (isEmpty(friends)) {
+        friends = await getFriends();
+      }
+    }
     if (!pageId) {
       // check if the site configuration provides an override or a fallback for
       // the page's URI
@@ -82,6 +90,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     recordMap = await getPage(pageId);
   }
 
-  const props = {site, recordMap, pageId, browseTotal};
+  const props = {site, recordMap, pageId, browseTotal,friends};
   return {...props, ...(await acl.pageAcl(props))};
 }
