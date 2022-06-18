@@ -1,5 +1,5 @@
+import { author } from 'lib/config'
 import * as React from 'react'
-import * as config from 'lib/config'
 
 import styles from './styles.module.css'
 
@@ -52,7 +52,7 @@ const FooterImpl: React.FC<{browse:number}> = ({browse }) => {
           </a>
         </div>
         <p>本站累计 {browse} 次访问</p>
-        <p>Clover © 2022 {config.author} 全著作権所有.</p>
+        <p>Clover © 2022 {author} 全著作権所有.</p>
       </div>
     </footer>
   )

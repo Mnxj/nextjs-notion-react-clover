@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {db} from '../lib/db';
-import {isRedisEnabled} from '../lib/config';
+import {inductionIcon, isRedisEnabled} from '../lib/config';
 import {isEmpty} from 'lodash';
 import {getNotionIds} from '../lib/get-created-notions';
 import {LayoutTemp} from '../components/LayoutTemp';
@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
         await getNotionIds();
       }
     }
-    const notionIds = await db.get('created-time');
+    const notionIds = await db.get('induction');
     const browseTotal = await getBrowseTotal();
     const props = {notionIds, browseTotal};
     return {
@@ -28,10 +28,9 @@ export const getStaticProps = async () => {
     console.warn(`redis error get `, err.message);
   }
 };
-const Created = (props) => {
+const Induction = (props) => {
   const {components, mapPageUrl} = useNotionContext();
   const [notionIds,setNotionIds] =useState(props.notionIds);
-  const url = '/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252Fc6c12aa7-8d2e-4714-8b7f-d10388fd7388%252F4kcc0eea3ccfd-d6bd-3cd0-8e41-63ba599fd301.jpg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&w=1920&q=75 1x, /_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252Fc6c12aa7-8d2e-4714-8b7f-d10388fd7388%252F4kcc0eea3ccfd-d6bd-3cd0-8e41-63ba599fd301.jpg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&';
 
   const changeNotionIds = (key) => {
     const data = {...notionIds}
@@ -39,7 +38,7 @@ const Created = (props) => {
     setNotionIds(data)
   }
   return (
-    <LayoutTemp browseTotal={props.browseTotal} LayoutTitle='归档' url={url}>
+    <LayoutTemp browseTotal={props.browseTotal} LayoutTitle='归档' url={inductionIcon}>
       <div id='content' className='site-content'>
         <article className='hentry'>
           <div id='archives-temp'>
@@ -82,4 +81,4 @@ const Created = (props) => {
   );
 
 };
-export default Created;
+export default Induction;

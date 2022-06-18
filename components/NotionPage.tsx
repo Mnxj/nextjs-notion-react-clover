@@ -17,7 +17,6 @@ import {mapPageUrl, getCanonicalPageUrl} from 'lib/map-page-url'
 import {mapImageUrl} from 'lib/map-image-url'
 import {searchNotion} from 'lib/search-notion'
 import * as types from 'lib/types'
-import * as config from 'lib/config'
 
 // components
 import {Loading} from './Loading'
@@ -31,6 +30,7 @@ import {GitHubShareButton} from './GitHubShareButton'
 import styles from './styles.module.css'
 import Layout from './Layout';
 import {HomeTop} from './Home';
+import {author, defaultPageCoverPosition, description, isDev, isSearchEnabled, isServer} from '../lib/config';
 
 
 // -----------------------------------------------------------------------------
@@ -231,15 +231,15 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const title =
     tagsPage && propertyToFilterName ? `"${propertyToFilterName}"` : name
 
-  console.log('notion page', {
-    isDev: config.isDev,
-    title,
-    pageId,
-    rootNotionPageId: site.rootNotionPageId,
-    recordMap
-  })
+  // console.log('notion page', {
+  //   isDev: config.isDev,
+  //   title,
+  //   pageId,
+  //   rootNotionPageId: site.rootNotionPageId,
+  //   recordMap
+  // })
 
-  if (!config.isServer) {
+  if (!isServer) {
     // add important objects to the window global for easy debugging
     const g = window as any
     g.pageId = pageId
@@ -248,7 +248,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
   }
 
   const canonicalPageUrl =
-    !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+    !isDev && getCanonicalPageUrl(site, recordMap)(pageId)
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
@@ -256,11 +256,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
     block
   )
 
-  const author = config.author
-
   const socialDescription =
-    getPageProperty<string>('Description', block, recordMap) ||
-    config.description
+    getPageProperty<string>('Description', block, recordMap) || description
 
   return (
     <Layout>
@@ -290,11 +287,11 @@ export const NotionPage: React.FC<types.PageProps> = ({
         showTableOfContents={true}
         linkTableTitleProperties={false}
         minTableOfContentsItems={minTableOfContentsItems}
-        defaultPageCoverPosition={config.defaultPageCoverPosition}
+        defaultPageCoverPosition={defaultPageCoverPosition}
         mapPageUrl={siteMapPageUrl}
         mapImageUrl={mapImageUrl}
         pageTitle={!eq(name, author) ? title : ''}
-        searchNotion={config.isSearchEnabled ? searchNotion : null}
+        searchNotion={isSearchEnabled ? searchNotion : null}
         pageAside={pageAside}
         footer={footer}
       />

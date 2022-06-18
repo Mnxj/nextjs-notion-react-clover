@@ -2,8 +2,8 @@ import Head from 'next/head'
 import * as React from 'react'
 
 import * as types from 'lib/types'
-import * as config from 'lib/config'
 import { getSocialImageUrl } from 'lib/get-social-image-url'
+import {host} from '../lib/config';
 
 export const PageHead: React.FC<
   types.PageProps & {
@@ -13,7 +13,7 @@ export const PageHead: React.FC<
     url?: string
   }
 > = ({ site, title, description, pageId, image, url }) => {
-  const rssFeedUrl = `${config.host}/feed`
+  const rssFeedUrl = `${host}/feed`
 
   title = title ?? site?.name
   description = description ?? site?.description

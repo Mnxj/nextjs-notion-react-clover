@@ -1,11 +1,11 @@
 import * as React from 'react'
-import * as config from 'lib/config'
 import styles from './styles.module.css'
+import {github} from '../lib/config';
 
 export const GitHubShareButton: React.FC = () => {
   return (
     <a
-      href={`https://github.com/${config.github}/clover`}
+      href={`https://github.com/${github}/clover`}
       target='_blank'
       rel='noopener noreferrer'
       className={styles.githubCorner}

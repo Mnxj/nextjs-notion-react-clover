@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 import {useRef, useState} from 'react';
-import * as config from 'lib/config'
+import {infoMessage} from '../lib/config';
 
 export const HomeTop = () => {
     const [openVideo, setOpenVideo] = useState(false);
@@ -90,7 +90,7 @@ export const HomeTop = () => {
         </div>
         <div className={styles.notice}>
           <i className='iconfont icon-notice'/>
-          <div className='notice-content'>{config.infoMessage}</div>
+          <div className='notice-content'>{infoMessage}</div>
         </div>
       </>
     );

@@ -3,8 +3,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import * as types from '../lib/types';
 import {Breadcrumbs, useNotionContext} from 'react-notion-x';
-import * as config from '../lib/config';
-import {Links, navigationLinks} from '../lib/config';
+import {author, Links, logo, navigationLinks} from '../lib/config';
 import cs from 'classnames';
 import Link from 'next/link';
 import {NotionSearch} from './NotionSearch';
@@ -122,14 +121,14 @@ export const PageHeader: React.FC<{
           <div className={styles.headerBranding}>
             <div className={styles.headerTitle}>
               <img
-                src={config.logo}
+                src={logo}
                 className={styles.imageLog}
                 alt='log'
               />
 
               {isEmpty(block) || Links.has(block.id.replaceAll('-', '')) ? <div className='breadcrumbs'>
                   <Link href='/'><a className='breadcrumb'>
-                    <span className='title'>{config.author}</span></a>
+                    <span className='title'>{author}</span></a>
                   </Link>
                 </div>
                 : <Breadcrumbs block={block} rootOnly={false}/>}

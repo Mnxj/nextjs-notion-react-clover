@@ -13,8 +13,8 @@ import { PageBlock } from 'notion-types'
 import { notion } from 'lib/notion-api'
 import { mapImageUrl } from 'lib/map-image-url'
 import { interRegular } from 'lib/fonts'
-import * as config from 'lib/config'
 import Head from "next/head";
+import {name,author, defaultPageCoverPosition, defaultPageIcon, domain} from '../../../lib/config';
 
 /**
  * Social image generation via headless chrome.
@@ -46,28 +46,25 @@ export default withOGImage<'query', 'id'>({
 
       const isBlogPost =
         block.type === 'page' && block.parent_table === 'collection'
-      const title = getBlockTitle(block, recordMap) || config.name
+      const title = getBlockTitle(block, recordMap) || name
       const image = mapImageUrl(
         getPageProperty<string>('Social Image', block, recordMap) ||
           (block as PageBlock).format?.page_cover ,
         block
       )
 
-      const imageCoverPosition =
-        (block as PageBlock).format?.page_cover_position ??
-        config.defaultPageCoverPosition
+      const imageCoverPosition = (block as PageBlock).format?.page_cover_position ?? defaultPageCoverPosition
       const imageObjectPosition = imageCoverPosition
         ? `center ${(1 - imageCoverPosition) * 100}%`
         : null
 
       const blockIcon = getBlockIcon(block, recordMap)
       const authorImage = mapImageUrl(
-        blockIcon && isUrl(blockIcon) ? blockIcon : config.defaultPageIcon,
+        blockIcon && isUrl(blockIcon) ? blockIcon : defaultPageIcon,
         block
       )
 
-      const author =
-        getPageProperty<string>('Author', block, recordMap) || config.author
+      const imgAuthor = getPageProperty<string>('Author', block, recordMap) || author
 
       // const socialDescription =
       //   getPageProperty<string>('Description', block, recordMap) ||
@@ -94,7 +91,7 @@ export default withOGImage<'query', 'id'>({
               month: 'long'
             })} ${dateUpdated.getFullYear()}`
           : undefined
-      const detail = date || config.domain
+      const detail = date || domain
 
       return (
         <html>
@@ -118,9 +115,9 @@ export default withOGImage<'query', 'id'>({
                       />
                     )}
 
-                    {(author || detail) && (
+                    {(imgAuthor || detail) && (
                       <div className='metadata-rhs'>
-                        {author && <div className='author'>{author}</div>}
+                        {imgAuthor && <div className='author'>{imgAuthor}</div>}
                         {detail && <div className='detail'>{detail}</div>}
                       </div>
                     )}

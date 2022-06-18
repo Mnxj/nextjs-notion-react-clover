@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import styles from './styles.module.css';
-import * as config from '../lib/config';
 import {Footer} from './Footer';
 import {PageHeader} from './Header';
 import {useState} from 'react';
 import {Sidebar} from './sidebar/Sidebar';
 import {PageHead} from './PageHead';
+import {author, logo} from '../lib/config';
 
 const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
   const [openNav, setOpenNav] = useState(false);
@@ -24,8 +24,8 @@ const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
           </div>
           <div className={styles.headerBranding}>
             <h1 className={styles.headerTitle}>
-              {config.author}
-              <img src={config.logo} className={styles.imageLog} alt='log'/>
+              {author}
+              <img src={logo} className={styles.imageLog} alt='log'/>
             </h1>
           </div>
         </div>

@@ -35,7 +35,7 @@ export const getNotionIds = async () => {
     });
     if (!isEmpty(results)) {
       try {
-        await db.set('created-time', results, 8.64e7);
+        await db.set('induction', results, 8.64e7);
       } catch (err) {
         console.warn(`redis error :`, err.message);
       }

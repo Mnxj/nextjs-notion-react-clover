@@ -21,6 +21,8 @@ export interface SiteConfig {
 
   defaultPageIcon?: string | null
   defaultPageCoverPosition?: number | null
+  inductionIcon?: string | null
+  tagsIcon?: string | null
 
   isPreviewImageSupportEnabled?: boolean
   isTweetEmbedSupportEnabled?: boolean

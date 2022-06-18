@@ -2,9 +2,8 @@ import * as React from 'react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {debounce, isEmpty} from 'lodash';
 import {__spreadValues, mergeGrade, searchNotion} from '../lib/search-notion';
-import * as config from '../lib/config';
 import {getBlockParentPage, getBlockTitle} from 'notion-utils';
-import {defaultPageIcon} from '../lib/config';
+import {defaultPageIcon, rootNotionPageId} from '../lib/config';
 import cs from 'classnames';
 import {useNotionContext} from 'react-notion-x';
 
@@ -22,7 +21,7 @@ export const NotionSearch = () => {
       return;
     }
     setIsLoading(true);
-    searchNotion({query: value, ancestorId: config.rootNotionPageId}).then((result) => {
+    searchNotion({query: value, ancestorId: rootNotionPageId}).then((result) => {
       let searchResults = __spreadValues({}, result);
       const results = searchResults.results.map((result2) => {
         let _a, _b;
