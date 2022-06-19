@@ -7,6 +7,7 @@ import {useState} from 'react';
 import {Sidebar} from './sidebar/Sidebar';
 import {PageHead} from './PageHead';
 import {author, logo} from '../lib/config';
+import {GitHubShareButton} from './GitHubShareButton';
 
 const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
   const [openNav, setOpenNav] = useState(false);
@@ -34,6 +35,7 @@ const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
         {isNotNotionFooter && <Footer browse={browseTotal}/>}
       </section>
       <Sidebar openNav={openNav}/>
+      <GitHubShareButton/>
     </>
   );
 };

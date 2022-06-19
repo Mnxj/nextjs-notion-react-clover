@@ -1,5 +1,4 @@
 import { siteConfig } from './lib/site-config'
-import {centerBgIcon} from './lib/config';
 
 export default siteConfig({
   // the site's root Notion page (required)

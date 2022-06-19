@@ -1,36 +1,42 @@
-import * as React from 'react'
-import Link from 'next/link'
+import * as React from 'react';
+import Link from 'next/link';
 import {eq} from 'lodash';
-import Image from 'next/image'
-import dynamic from 'next/dynamic'
-import cs from 'classnames'
-import {useRouter} from 'next/router'
-import {useSearchParam} from 'react-use'
-import {PageBlock} from 'notion-types'
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import cs from 'classnames';
+import {useRouter} from 'next/router';
+import {useSearchParam} from 'react-use';
+import {PageBlock} from 'notion-types';
 
 // core notion renderer
-import {NotionRenderer} from 'react-notion-x'
+import {NotionRenderer} from 'react-notion-x';
 
 // utils
 import {getBlockTitle, getPageProperty, formatDate, normalizeTitle} from 'notion-utils';
-import {mapPageUrl, getCanonicalPageUrl} from 'lib/map-page-url'
-import {mapImageUrl} from 'lib/map-image-url'
-import {searchNotion} from 'lib/search-notion'
-import * as types from 'lib/types'
+import {mapPageUrl, getCanonicalPageUrl} from 'lib/map-page-url';
+import {mapImageUrl} from 'lib/map-image-url';
+import {searchNotion} from 'lib/search-notion';
+import * as types from 'lib/types';
 
 // components
-import {Loading} from './Loading'
-import {Page404} from './Page404'
-import {PageHead} from './PageHead'
-import {PageAside} from './PageAside'
-import {Footer} from './Footer'
-import {PageHeader} from './Header'
-import {GitHubShareButton} from './GitHubShareButton'
+import {Loading} from './Loading';
+import {Page404} from './Page404';
+import {PageHead} from './PageHead';
+import {PageAside} from './PageAside';
+import {Footer} from './Footer';
+import {PageHeader} from './Header';
 
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 import Layout from './Layout';
 import {HomeTop} from './Home';
-import {author, defaultPageCoverPosition, description, isDev, isSearchEnabled, isServer} from '../lib/config';
+import {
+  author,
+  defaultPageCoverPosition,
+  description,
+  isDev,
+  isSearchEnabled,
+  isServer
+} from '../lib/config';
 
 
 // -----------------------------------------------------------------------------
@@ -72,35 +78,35 @@ const Code = dynamic(() =>
       import('prismjs/components/prism-swift.js'),
       import('prismjs/components/prism-wasm.js'),
       import('prismjs/components/prism-yaml.js')
-    ])
-    return m.Code
+    ]);
+    return m.Code;
   })
-)
+);
 
 const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then(
     (m) => m.Collection
   )
-)
+);
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
-)
+);
 const Pdf = dynamic(
   () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
   {
     ssr: false
   }
-)
+);
 const Modal = dynamic(
   () =>
     import('react-notion-x/build/third-party/modal').then((m) => {
-      m.Modal.setAppElement('.notion-viewport')
-      return m.Modal
+      m.Modal.setAppElement('.notion-viewport');
+      return m.Modal;
     }),
   {
     ssr: false
   }
-)
+);
 
 const propertyLastEditedTimeValue = (
   {block, pageHeader},
@@ -109,58 +115,59 @@ const propertyLastEditedTimeValue = (
   if (pageHeader && block?.last_edited_time) {
     return `Last updated ${formatDate(block?.last_edited_time, {
       month: 'long'
-    })}`
+    })}`;
   }
 
-  return defaultFn()
-}
+  return defaultFn();
+};
 
 const propertyDateValue = (
   {data, schema, pageHeader},
   defaultFn: () => React.ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'published') {
-    const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date
+    const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date;
 
     if (publishDate) {
       return `Published ${formatDate(publishDate, {
         month: 'long'
-      })}`
+      })}`;
     }
   }
 
-  return defaultFn()
-}
+  return defaultFn();
+};
 
 const propertyTextValue = (
   {schema, pageHeader},
   defaultFn: () => React.ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'author') {
-    return <b>{defaultFn()}</b>
+    return <b>{defaultFn()}</b>;
   }
 
-  return defaultFn()
-}
+  return defaultFn();
+};
 const propertySelectValue = (
-  { schema, value, key, pageHeader },
+  {schema, value, key, pageHeader},
   defaultFn: () => React.ReactNode
 ) => {
-  value = normalizeTitle(value)
+  value = normalizeTitle(value);
 
   if (pageHeader && schema.type === 'multi_select' && value) {
     return (
       <Link href={`/tags/${value}`} key={key}>
         <a>{defaultFn()}</a>
       </Link>
-    )
+    );
   }
 
-  return defaultFn()
-}
+  return defaultFn();
+};
 
 export const NotionPage: React.FC<types.PageProps> = ({
                                                         site,
+                                                        appToken,
                                                         recordMap,
                                                         error,
                                                         pageId,
@@ -169,8 +176,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
                                                         friends,
                                                         propertyToFilterName
                                                       }) => {
-  const router = useRouter()
-  const lite = useSearchParam('lite')
+  const router = useRouter();
+  const lite = useSearchParam('lite');
 
   const components = React.useMemo(
     () => ({
@@ -188,49 +195,44 @@ export const NotionPage: React.FC<types.PageProps> = ({
       propertySelectValue
     }),
     []
-  )
+  );
 
   // lite mode is for oembed
-  const isLiteMode = lite === 'true'
+  const isLiteMode = lite === 'true';
 
   const siteMapPageUrl = React.useMemo(() => {
-    const params: any = {}
-    if (lite) params.lite = lite
+    const params: any = {};
+    if (lite) params.lite = lite;
 
-    const searchParams = new URLSearchParams(params)
-    return mapPageUrl(site, recordMap, searchParams)
-  }, [site, recordMap, lite])
+    const searchParams = new URLSearchParams(params);
+    return mapPageUrl(site, recordMap, searchParams);
+  }, [site, recordMap, lite]);
 
-  const keys = Object.keys(recordMap?.block || {})
-  const block = recordMap?.block?.[keys[0]]?.value
+  const keys = Object.keys(recordMap?.block || {});
+  const block = recordMap?.block?.[keys[0]]?.value;
 
-  // const isRootPage =
-  //   parsePageId(block?.id) === parsePageId(site?.rootNotionPageId)
-  const isBlogPost =
-    block?.type === 'page' && block?.parent_table === 'collection'
-
-  const minTableOfContentsItems = 3
+  const minTableOfContentsItems = 3;
 
   const pageAside = React.useMemo(
     () => (
-      <PageAside pageId={pageId} friends={friends}  isBlogPost={isBlogPost} />
+      <PageAside pageId={pageId} friends={friends} appToken={appToken}/>
     ),
-    [pageId, friends, isBlogPost]
-  )
+    [pageId, friends, appToken]
+  );
 
-  const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal])
+  const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
 
   if (router.isFallback) {
-    return <Loading />
+    return <Loading/>;
   }
 
   if (error || !site || !block) {
-    return <Page404 site={site} pageId={pageId} error={error} />
+    return <Page404 site={site} pageId={pageId} error={error}/>;
   }
 
-  const name = getBlockTitle(block, recordMap) || site.name
+  const name = getBlockTitle(block, recordMap) || site.name;
   const title =
-    tagsPage && propertyToFilterName ? `"${propertyToFilterName}"` : name
+    tagsPage && propertyToFilterName ? `"${propertyToFilterName}"` : name;
 
   // console.log('notion page', {
   //   isDev: config.isDev,
@@ -242,23 +244,23 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   if (!isServer) {
     // add important objects to the window global for easy debugging
-    const g = window as any
-    g.pageId = pageId
-    g.recordMap = recordMap
-    g.block = block
+    const g = window as any;
+    g.pageId = pageId;
+    g.recordMap = recordMap;
+    g.block = block;
   }
 
   const canonicalPageUrl =
-    !isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+    !isDev && getCanonicalPageUrl(site, recordMap)(pageId);
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
     (block as PageBlock).format?.page_cover,
     block
-  )
+  );
 
   const socialDescription =
-    getPageProperty<string>('Description', block, recordMap) || description
+    getPageProperty<string>('Description', block, recordMap) || description;
 
   return (
     <Layout>
@@ -270,7 +272,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         image={socialImage}
         url={canonicalPageUrl}
       />
-      {eq(name, author)&& <HomeTop/>}
+      {eq(name, author) && <HomeTop/>}
 
       <NotionRenderer
         bodyClassName={cs(
@@ -296,8 +298,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
         pageAside={pageAside}
         footer={footer}
       />
-
-      <GitHubShareButton/>
     </Layout>
-  )
-}
+  );
+};

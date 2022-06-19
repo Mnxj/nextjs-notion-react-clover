@@ -5,7 +5,7 @@ import {github} from '../lib/config';
 export const GitHubShareButton: React.FC = () => {
   return (
     <a
-      href={`https://github.com/${github}/clover`}
+      href={`https://github.com/${github}/nextjs-notion-react-clover`}
       target='_blank'
       rel='noopener noreferrer'
       className={styles.githubCorner}

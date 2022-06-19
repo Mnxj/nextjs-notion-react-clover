@@ -5,6 +5,6 @@ export function bootstrap() {
 ║  ║  ║ ║╚╗╔╝║╣ ╠╦╝
 ╚═╝╩═╝╚═╝ ╚╝ ╚═╝╩╚═
 
-   This site is built using Notion, Next.js, and https://github.com/Mnxj/clover.
+   This site is built using Notion, Next.js, and https://github.com/Mnxj/nextjs-notion-react-clover.
 `)
 }

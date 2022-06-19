@@ -9,6 +9,7 @@ export interface PageError {
 
 export interface PageProps {
   site?: Site
+  appToken?: AppToken,
   recordMap?: ExtendedRecordMap
   pageId?: string
   browseTotal?:number
@@ -16,6 +17,11 @@ export interface PageProps {
   tagsPage?: boolean
   friends?: Array<any>
   propertyToFilterName?: string
+}
+
+export interface AppToken {
+  appId?: string,
+  appKey?: string,
 }
 
 export interface Site {

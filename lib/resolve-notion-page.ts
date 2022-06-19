@@ -2,7 +2,15 @@ import {parsePageId} from 'notion-utils';
 import {ExtendedRecordMap} from 'notion-types';
 
 import * as acl from './acl';
-import {pageUrlOverrides, pageUrlAdditions, environment, site, friendPageId, isRedisEnabled} from './config';
+import {
+  pageUrlOverrides,
+  pageUrlAdditions,
+  environment,
+  site,
+  friendPageId,
+  isRedisEnabled,
+  appToken
+} from './config';
 import {db} from './db';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
@@ -90,6 +98,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     recordMap = await getPage(pageId);
   }
 
-  const props = {site, recordMap, pageId, browseTotal,friends};
+  const props = {site, appToken, recordMap, pageId, browseTotal,friends};
   return {...props, ...(await acl.pageAcl(props))};
 }

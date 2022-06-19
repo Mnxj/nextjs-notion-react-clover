@@ -675,7 +675,30 @@ img.notion-page-icon {
   border-radius: 100%;
 }
 
-.links-box .links-items .link-item-dalao:hover {
+.links-box ul li:before {
+  content: "";
+  background-color: orange;
+  transform: skew(45deg, 0);
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -60px;
+  z-index: -1;
+  transition: all .5s;
+  opacity: .2
+}
+
+.links-box ul li:hover {
+  color: #27323a;
+  border: 1px solid orange
+}
+
+.links-box ul li:hover:before {
+  width: 180%
+}
+
+.links-box .links-items .link-item-active:hover {
   border: 1px solid orange;
 }
 
@@ -825,4 +848,34 @@ span.sitename {
 
 .notion-page-content-has-aside details {
   width: 100%;
+}
+
+/*评论*/
+.leancloud_visitors {
+  padding: 30px 12.78%;
+  text-align: center;
+}
+
+.leancloud_visitors i {
+  color: #fe9600;
+}
+
+.leancloud_visitors p {
+  font-size: 13px;
+  line-height: 30px;
+  margin: 15px 0 0;
+  color: #7d8588;
+  letter-spacing: 0;
+  display: inline-block;
+  padding: 10px 20px;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+
+.v[data-class="v"] {
+  width: 100%;
+}
+
+.vempty {
+  display: none!important;
 }

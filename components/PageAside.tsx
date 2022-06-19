@@ -1,19 +1,22 @@
 import * as React from 'react';
-import {isEmpty} from 'lodash';
+import {eq, isEmpty} from 'lodash';
 import ProgressiveImg from './ProgressiveImg';
+import {rootNotionPageId} from '../lib/config';
+import Valine from './ValineComment';
+import {AppToken} from '../lib/types';
 
 export const PageAside: React.FC<{
   pageId: string
   friends: Array<any>
-  isBlogPost: boolean
-}> = ({pageId, friends, isBlogPost}) => {
+  appToken: AppToken
+}> = ({pageId, friends,appToken}) => {
   return <>
     {!isEmpty(friends) && <div className='links-box'>
       <div className='links-items'>
-        <ul className='link-items fontSmooth'>
+        <ul>
           {
             Object.keys(friends).map(url => {
-              return <li key={url} className='link-item link-item-dalao'>
+              return <li key={url} className='link-item link-item-active'>
                 <a
                   className='link-item-inner effect-apollo'
                   href={url}
@@ -31,5 +34,7 @@ export const PageAside: React.FC<{
         </ul>
       </div>
     </div>}
+    {!(eq(rootNotionPageId,pageId) || isEmpty(appToken.appId) || isEmpty(appToken.appKey))
+      && <Valine path={pageId} appId={appToken.appId} appKey={appToken.appKey}/>}
   </>;
 };
