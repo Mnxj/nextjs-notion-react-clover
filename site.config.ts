@@ -1,4 +1,5 @@
 import { siteConfig } from './lib/site-config'
+import {centerBgIcon} from './lib/config';
 
 export default siteConfig({
   // the site's root Notion page (required)
@@ -49,7 +50,7 @@ export default siteConfig({
 
   inductionIcon: '/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252Fc6c12aa7-8d2e-4714-8b7f-d10388fd7388%252F4kcc0eea3ccfd-d6bd-3cd0-8e41-63ba599fd301.jpg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&',
   tagsIcon: '/_next/image?url=https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F7de19ce8-e25c-424a-9cf0-a2a9ca6faa28%252F004630-16460667904dd2.jpeg%3Ftable%3Dblock%26id%3D4ee34fae-1079-479d-846a-ed48fac40af0%26cache%3Dv2&',
-
+  centerBgIcon: '/images/center-bg.gif',
   // whether or not to enable support for LQIP preview images (optional)
   isPreviewImageSupportEnabled: true,
 

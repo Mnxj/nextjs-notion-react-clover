@@ -1,8 +1,7 @@
 import styles from './styles.module.css'
 import {useRef, useState} from 'react';
-import {bilibili, csdn, description, github, infoMessage, name, wangyiyun, zhihu} from '../lib/config';
+import {bilibili, centerBgIcon, csdn, description, github, infoMessage, name, wangyiyun, zhihu} from '../lib/config';
 import ProgressiveImg from './ProgressiveImg';
-import {centerBg} from '../lib/fonts';
 
 export const HomeTop = () => {
     const [openVideo, setOpenVideo] = useState(false);
@@ -70,7 +69,7 @@ export const HomeTop = () => {
 
                     </div>
                 </div>
-                <ProgressiveImg src={centerBg} alt='home' style={{ width: '100%',height: '100%',position: 'absolute',top: '0px'}}/>
+                <ProgressiveImg src={centerBgIcon} alt='home' style={{ width: '100%',height: '100%',position: 'absolute',top: '0px'}}/>
             </figure>
             <div className={styles.videoContainer}>
                 <video

@@ -1,6 +1,9 @@
 import Layout from '../components/Layout';
 import {NotionSearch} from '../components/NotionSearch';
 import {getBrowseTotal} from '../lib/hander-redis';
+import {useRouter} from 'next/router';
+import {Loading} from '../components/Loading';
+import React from 'react';
 
 export const getStaticProps = async () => {
 
@@ -17,6 +20,10 @@ export const getStaticProps = async () => {
 };
 
 const Search = (props) => {
+  const router = useRouter()
+  if (router.isFallback) {
+    return <Loading />
+  }
   return (
     <Layout isNotNotionFooter={true} browseTotal={props.browseTotal} title='Search'>
       <div className='search-form search-form--modal is-mobile'>

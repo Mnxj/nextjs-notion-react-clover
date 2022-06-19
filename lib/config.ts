@@ -90,6 +90,11 @@ export const tagsIcon: string | null = getSiteConfig(
   null
 )
 
+export const centerBgIcon: string | null = getSiteConfig(
+  'centerBgIcon',
+  null
+)
+
 // Optional whether or not to enable support for LQIP preview images
 export const isPreviewImageSupportEnabled: boolean = getSiteConfig(
   'isPreviewImageSupportEnabled',

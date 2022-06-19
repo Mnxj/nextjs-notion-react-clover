@@ -8,7 +8,7 @@ export const PageAside: React.FC<{
   isBlogPost: boolean
 }> = ({pageId, friends, isBlogPost}) => {
   return <>
-    {!isEmpty(friends)&&<div className='links-box'>
+    {!isEmpty(friends) && <div className='links-box'>
       <div className='links-items'>
         <ul className='link-items fontSmooth'>
           {

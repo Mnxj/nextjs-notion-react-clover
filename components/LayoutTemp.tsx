@@ -1,9 +1,14 @@
 import Layout from './Layout';
 import React from 'react';
 import ProgressiveImg from './ProgressiveImg';
+import {useRouter} from 'next/router';
+import {Loading} from './Loading';
 
 export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
-
+  const router = useRouter()
+  if (router.isFallback) {
+    return <Loading />
+  }
   return (
     <Layout browseTotal={browseTotal} isNotNotionFooter={true} title={LayoutTitle}>
       <div className='notion-page-scroller'>
