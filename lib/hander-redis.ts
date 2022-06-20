@@ -1,11 +1,25 @@
-import {isRedisEnabled} from './config';
+import {friendPageId} from './config';
 import {db} from './db';
+import {eq, isEmpty} from 'lodash';
+import {getFriends, getNotionCards} from './get-created-notions';
 
-export const getBrowseTotal = async () => {
-  let browseTotal = 0;
-  if (isRedisEnabled) {
-    browseTotal = await db.get('browse');
+export const getBrowseTotal = async () => await db.get('browse') + 1;
+
+export const getFriend = async (pageId) => {
+  let friends = null;
+  if (eq(pageId, friendPageId)) {
+    friends = await db.get('friend');
+    if (isEmpty(friends)) {
+      friends = await getFriends();
+    }
   }
-  browseTotal = browseTotal + 1;
-  return browseTotal;
-}
+  return friends;
+};
+
+export const getNotionCard = async (pageId) => {
+  let notionCard = await db.get('NotionCards');
+  if (isEmpty(notionCard)) {
+    notionCard = await getNotionCards();
+  }
+  return {pageId, children: isEmpty(notionCard[pageId]) ? null : notionCard[pageId]};
+};

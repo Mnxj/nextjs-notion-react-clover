@@ -450,13 +450,6 @@
   opacity: 1;
 }
 
-.notion-aside {
-  display: flex;
-  position: relative;
-  top: 0;
-  width: 100%;
-}
-
 /*search*/
 .search-form--modal {
   transition: visibility .25s ease, opacity .25s ease;
@@ -789,9 +782,6 @@ span.sitename {
 }
 
 @media (min-width: 1300px) and (min-height: 300px) {
-  .notion-page-content-has-aside {
-    flex-direction: column;
-  }
 
   .notion-aside {
     width: 720px;
@@ -850,10 +840,19 @@ span.sitename {
   width: 100%;
 }
 
-/*评论*/
+.notion-aside-table-of-contents {
+  margin-left: 20px;
+}
+  /*pageFooter*/
+.valine-box {
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  display: flex;
+}
+
 .leancloud_visitors {
   padding: 30px 12.78%;
-  text-align: center;
 }
 
 .leancloud_visitors i {
@@ -877,5 +876,101 @@ span.sitename {
 }
 
 .vempty {
-  display: none!important;
+  display: none !important;
+}
+
+.article-info {
+  max-width: 800px !important;
+}
+
+.article-info {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.single-reward {
+  position: relative;
+  width: 100%;
+  margin: 35px auto;
+  text-align: center;
+  z-index: 90;
+}
+
+.single-reward .reward-open {
+  position: relative;
+  font-size: 18px;
+  padding: 7px;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  background: #d34836;
+  cursor: pointer
+}
+
+.single-reward .reward-main {
+  position: absolute;
+  top: 40px;
+  left: -95px;
+  margin: 0;
+  padding: 15px 0 0;
+  width: 355px;
+  background: 0 0;
+  display: none;
+  -webkit-animation: main .4s;
+  animation: main .4s
+}
+
+.reward-open:hover .reward-main {
+  display: block
+}
+
+.single-reward .reward-row {
+  margin: 0 auto;
+  padding: 20px 15px 10px;
+  background: #f5f5f5;
+  display: inline-block;
+  border-radius: 4px;
+  cursor: auto
+}
+
+.single-reward .reward-row:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid #f5f5f5;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  margin: 0 auto
+}
+
+.single-reward .reward-row li {
+  list-style-type: none;
+  padding: 0 12px;
+  display: inline-block
+}
+
+.reward-row li img {
+  width: 130px;
+  max-width: 130px;
+  border-radius: 3px;
+  position: relative
+}
+
+.reward-row li:after {
+  display: block;
+  padding: 5px 0 0;
+  font-size: 13px;
+  color: #555
+}
+
+.wechat-code:after {
+  content: "微信"
+}
+
+.post-license a {
+  color: #b3b3b3;
 }

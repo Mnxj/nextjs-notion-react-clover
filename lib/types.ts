@@ -11,6 +11,7 @@ export interface PageProps {
   site?: Site
   appToken?: AppToken,
   recordMap?: ExtendedRecordMap
+  notionCard?: any
   pageId?: string
   browseTotal?:number
   error?: PageError

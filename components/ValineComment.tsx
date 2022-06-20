@@ -20,13 +20,13 @@ const Valine = ({appId, appKey, path = '', ...others}) => {
     }
   }, [appId, appKey, path, ref]);
 
-  return <>
+  return <div className='valine-box'>
     <span id={path} className='leancloud_visitors' data-flag-title={path}>
       <p><i className='iconfont icon-tianqi-6'/> 曾经也有 <i className='leancloud-visitors-count'> </i> 个和你一样的人来过这里。
       </p>
       </span>
     <div ref={ref} {...others} />
-  </>;
+  </div>;
 };
 
 export default Valine

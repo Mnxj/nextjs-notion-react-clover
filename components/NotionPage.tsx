@@ -22,7 +22,7 @@ import * as types from 'lib/types';
 import {Loading} from './Loading';
 import {Page404} from './Page404';
 import {PageHead} from './PageHead';
-import {PageAside} from './PageAside';
+import {PageFooter} from './PageFooter';
 import {Footer} from './Footer';
 import {PageHeader} from './Header';
 
@@ -169,6 +169,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
                                                         site,
                                                         appToken,
                                                         recordMap,
+                                                        notionCard,
                                                         error,
                                                         pageId,
                                                         browseTotal,
@@ -213,11 +214,11 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const minTableOfContentsItems = 3;
 
-  const pageAside = React.useMemo(
+  const pageFooter = React.useMemo(
     () => (
-      <PageAside pageId={pageId} friends={friends} appToken={appToken}/>
+      <PageFooter pageId={pageId} friends={friends} appToken={appToken} notionCard={notionCard}/>
     ),
-    [pageId, friends, appToken]
+    [pageId, friends, appToken,notionCard]
   );
 
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
@@ -295,7 +296,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         mapImageUrl={mapImageUrl}
         pageTitle={!eq(name, author) ? title : ''}
         searchNotion={isSearchEnabled ? searchNotion : null}
-        pageAside={pageAside}
+        pageFooter={pageFooter}
         footer={footer}
       />
     </Layout>

@@ -7,30 +7,23 @@ import {
   pageUrlAdditions,
   environment,
   site,
-  friendPageId,
-  isRedisEnabled,
   appToken
 } from './config';
 import {db} from './db';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
-import {getBrowseTotal} from './hander-redis';
-import {eq, isEmpty} from 'lodash';
-import {getFriends} from './get-created-notions';
+import {getBrowseTotal, getFriend, getNotionCard} from './hander-redis';
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
   let recordMap: ExtendedRecordMap;
   let browseTotal = await getBrowseTotal();
   let friends = null
+  let notionCard = null
   if (rawPageId && rawPageId !== 'index') {
     pageId = parsePageId(rawPageId);
-    if (isRedisEnabled && eq(pageId,friendPageId)) {
-      friends = await db.get('friend');
-      if (isEmpty(friends)) {
-        friends = await getFriends();
-      }
-    }
+    friends = await getFriend(pageId);
+    notionCard = await getNotionCard(pageId);
     if (!pageId) {
       // check if the site configuration provides an override or a fallback for
       // the page's URI
@@ -98,6 +91,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     recordMap = await getPage(pageId);
   }
 
-  const props = {site, appToken, recordMap, pageId, browseTotal,friends};
+  const props = {site, appToken, notionCard, recordMap, pageId, browseTotal,friends};
   return {...props, ...(await acl.pageAcl(props))};
 }

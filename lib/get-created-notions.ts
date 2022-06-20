@@ -71,5 +71,34 @@ const setResults = async (results, key) => {
   }
 }
 
+export const getNotionCards = async () => {
+  await (async () => {
+    const response = await notion.databases.query({
+      database_id: articlesPageId,
+      "sorts": [
+        {
+          "timestamp": "created_time",
+          "direction": "descending"
+        },
+      ]
+    });
+
+    let notions=[]
+    response['results'].forEach(result=>{
+      notions.push({
+        id: result['id'],
+        title: result['properties']['Name']['title'][0]['plain_text'],
+        icon: result['cover']['file']['url'],
+      })
+    });
+    results[notions[0]['id']]={up:notions[1]}
+    results[notions[notions.length-1]['id']]={next:notions[notions.length-2]}
+    for(let i = 1 ; i< notions.length-1 ;i++){
+      results[notions[i]['id']]={up:notions[i+1],next:notions[i-1]}
+    }
+    await setResults(results, 'NotionCards')
+  })().catch(err => console.warn(`notion query :`, err.message));
+  return results;
+};
 
 const getMonthOrDay = (created_time: number) => parseInt(String(created_time)) < 10 ? '0' + created_time : created_time;
