@@ -425,7 +425,8 @@
 
 /* 背景 悬停放大*/
 .notion-collection-card-size-large img,
-.notion-page-cover-wrapper img {
+.notion-page-cover-wrapper img,
+.post-nepre img{
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -435,7 +436,8 @@
 }
 
 .notion-collection-card-size-large:hover img,
-.notion-page-cover-wrapper:hover img {
+.notion-page-cover-wrapper:hover img,
+.post-nepre:hover img{
   transform: scale(1.1)
 }
 
@@ -973,4 +975,123 @@ span.sitename {
 
 .post-license a {
   color: #b3b3b3;
+}
+
+/*下一篇上一篇*/
+.post-squares {
+  overflow: hidden;
+  width: 100%;
+  margin: 55px 0;
+  background: #000;
+}
+
+.post-nepre:hover {
+  background: #ffffff22;
+}
+
+.post-squares.nextprev .previous {
+  text-align: left;
+}
+
+.post-squares.nextprev a {
+  width: 100%;
+}
+.post-squares.nextprev a {
+  height: 150px;
+  padding: 55px 40px;
+  text-align: left;
+}
+
+.post-squares a {
+  position: relative;
+  display: block;
+  float: left;
+  overflow: hidden;
+}
+
+.post-squares.nextprev .previous .label {
+  top: 40px;
+  left: 40px;
+}
+.post-squares.nextprev .label {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+}
+.post-squares .label {
+  font-size: 13px;
+  display: block;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+
+.post-squares.nextprev .previous .info {
+  bottom: 40px;
+  left: 40px;
+}
+.post-squares.nextprev .info {
+  position: absolute;
+  width: 70%;
+}
+.post-squares .info {
+  position: relative;
+  z-index: 98;
+}
+
+.post-squares.nextprev .next h3, .post-squares.nextprev .previous h3 {
+  font-size: 14px;
+}
+.post-squares h3 {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 20px 0;
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.post-squares.nextprev .next .label {
+  top: 40px;
+  right: 40px;
+}
+.post-squares.nextprev .label {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+}
+.post-squares .label {
+  font-size: 13px;
+  display: block;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+
+.post-squares.nextprev .next .info {
+  right: 40px;
+  bottom: 40px;
+}
+.post-squares.nextprev .next .info {
+  text-align: right;
+}
+.post-squares.nextprev .info {
+  position: absolute;
+  width: 70%;
+}
+.post-squares .info {
+  position: relative;
+  z-index: 98;
+}
+
+.post-squares .full {
+  width: 100%;
+}
+
+@media (min-width: 860px) {
+  .post-squares .half {
+    width: 50%;
+    float: left;
+  }
 }

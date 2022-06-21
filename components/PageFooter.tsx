@@ -14,7 +14,7 @@ export const PageFooter: React.FC<{
 }> = ({pageId, friends, appToken,notionCard}) => {
   return <>
     {!isEmpty(friends) && <Friends friends={friends}/>}
-    {!isEmpty(notionCard.children)&& <PageFooterDetail notionCard={notionCard} />}
+    {!isEmpty(notionCard)&&!isEmpty(notionCard.children)&& <PageFooterDetail children={notionCard.children} />}
     {!(eq(rootNotionPageId, pageId) || isEmpty(appToken.appId) || isEmpty(appToken.appKey))
       && <Valine path={pageId} appId={appToken.appId} appKey={appToken.appKey}/>}
   </>;

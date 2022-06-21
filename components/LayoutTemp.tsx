@@ -27,7 +27,7 @@ export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
           position: 'relative',
           maxWidth: '100%'
         }}>
-          <ProgressiveImg src={String(`${url}w=3840&q=75`)} className='notion-page-cover' style={{
+          <ProgressiveImg src={String(`${url}w=3840&q=75`)} style={{
             position: 'absolute',
             inset: '0px',
             boxSizing: 'border-box',
@@ -43,7 +43,7 @@ export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
             minHeight: '100%',
             maxHeight: '100%',
             objectPosition: ' center 50%'
-          }} alt='tags' />
+          }} alt={LayoutTitle} />
         </span>
         </div>
         <main
