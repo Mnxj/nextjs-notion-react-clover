@@ -135,7 +135,7 @@ export const redisPassword: string  = process.env.REDIS_PASSWORD
 export const redisPort: string = process.env.REDIS_PORT
 export const redisUrl = getEnv(
   'REDIS_URL',
-  `rediss://:${redisPassword}@${redisHost}:${redisPort}`
+  `redis://:${redisPassword}@${redisHost}:${redisPort}`
 )
 export const redisNamespace: string | null = getEnv(
   'REDIS_NAMESPACE',
