@@ -3,6 +3,7 @@ import * as React from 'react';
 
 
 const Friends = ({friends}) => {
+  console.log(friends)
   return<div className='links-box'>
     <div className='links-items'>
       <ul>

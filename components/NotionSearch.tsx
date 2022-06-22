@@ -72,7 +72,7 @@ export const NotionSearch = () => {
   return (
     <div className='notion-search'>
       <div>
-        <p className='micro mb-'>输入后按回车搜索 ...</p>
+        <p className='micro mb-'>输入任意搜索 ...</p>
         {isLoading ? <i className='iconfont icon-loading2 loading'/> :
           <i className='iconfont icon-search'/>}
         <input
