@@ -1,79 +1,61 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# nextjs-notion-react-clover
 
-First, run the development server:
+Install [Docs](https://clover-blog.cn/nextjs-notion-react-clover%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B)
 
-```bash
-npm run dev
-# or
-yarn dev
-
-# read .env
-yarn add posthog-js
+[Demo](https://clover-blog.cn/) 
 
 
-problem
 
-The Serverless Function exceeds the maximum size limit of 50mb
+# Directory
+nextjs-notion-react-clover
+	- components # 主要存放页面模块
+	- lib # 封装函数
+	- pages # 页面主入口
+		- api # 外部资源请求
+		- tags # tags detail
+	- public # static
+		- images 
+		- media 
+	- styles 
+	- .env.example # key config
+	- .vercelignore # vercel config
+	- next.config.js # nextjs config
+	- site.config.ts # global variable config
 
-use .vercelignore
 
-# 自定义的Search不要跟react-notion-x重名.
 
-# input 截流防抖动
-  const changeHandler = (value) => {
-    if (!value) return
-    const result = searchNotion({
-        query:value,
-        ancestorId: config.rootNotionPageId,
-    });
-    console.log(value)
-  };
+# show
 
-  const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 300), []);
+![image-20220628180917307](README/image-20220628180917307.png)
 
-  useEffect(()=>{
-    return()=>{
-      debouncedChangeHandler.cancel();
-    }
-  })
+![image-20220628180937921](README/image-20220628180937921.png)
 
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+![image-20220628181011345](README/image-20220628181011345.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+![image-20220628181033678](README/image-20220628181033678.png)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![image-20220628181057958](README/image-20220628181057958.png)
 
-## Deploy on Vercel
+![image-20220628181127478](README/image-20220628181127478.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image-20220628181154309](README/image-20220628181154309.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## problem
+
+# build problem
+
 1、图片资源太大
 引入`.vercelignore`加入api的过滤
 2、加入`.vercelignore`过滤会过滤掉缓存的页面
 需要对api下面加一层，单独对图片目录过滤
 3、<components.Link 使用url会跳转到新的页面
 因为转为a标签带有`target="_blank"` 改为`target=""·`
-4、定时任务
-yarn add node-schedule
-5、valine 评论插件
-npm install valine --save
-6、友链的实现方案。
 
