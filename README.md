@@ -1,3 +1,5 @@
+[![OSCS Status](https://www.oscs1024.com/platform/badge/Mnxj/nextjs-notion-react-clover.svg?size=small)](https://www.oscs1024.com/project/Mnxj/nextjs-notion-react-clover?ref=badge_small)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 # nextjs-notion-react-clover
