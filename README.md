@@ -12,18 +12,31 @@ Install [Docs](https://clover-blog.cn/nextjs-notion-react-clover%E5%8D%9A%E5%AE%
 
 # Directory
 nextjs-notion-react-clover
+
 	- components # 主要存放页面模块
+ 
 	- lib # 封装函数
+ 
 	- pages # 页面主入口
+ 
 		- api # 外部资源请求
+  
 		- tags # tags detail
+  
 	- public # static
+ 
 		- images 
+  
 		- media 
+  
 	- styles 
+ 
 	- .env.example # key config
+ 
 	- .vercelignore # vercel config
+ 
 	- next.config.js # nextjs config
+ 
 	- site.config.ts # global variable config
 
 # local start
