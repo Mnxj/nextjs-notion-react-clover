@@ -28,9 +28,13 @@ nextjs-notion-react-clover
 
 # local start
 Foreword: [You need to prepare the key required for the .env file.](https://www.notion.so/nextjs-notion-react-clover-2f0f3d3248534cc1ae4ea20006ca6c71) 
+
 1、node 18.20.2+
+
 2、npm install -g yarn
+
 3、yarn install
+
 4、yarn dev
 
 # show
