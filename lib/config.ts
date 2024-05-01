@@ -135,7 +135,8 @@ export const redisPassword: string  = process.env.REDIS_PASSWORD
 export const redisPort: string = process.env.REDIS_PORT
 export const redisUrl = getEnv(
   'REDIS_URL',
-  `redis://:${redisPassword}@${redisHost}:${redisPort}`
+  // `redis://:${redisPassword}@${redisHost}:${redisPort}`
+  `rediss://:${redisPassword}@${redisHost}:${redisPort}` // use https://console.upstash.com/ 
 )
 export const redisNamespace: string | null = getEnv(
   'REDIS_NAMESPACE',

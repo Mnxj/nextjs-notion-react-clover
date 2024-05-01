@@ -90,7 +90,7 @@ export const HomeTop = () => {
                 <span><i className='iconfont icon-down' aria-hidden='true'/></span>
             </div>
         </div>
-        <div className={styles.notice}>
+        <div id='notion-page' className={styles.notice}>
           <div className={styles.noticeCenter}>
             <i className='iconfont icon-notice'/>
             <div className='notice-content'>{infoMessage}</div>
