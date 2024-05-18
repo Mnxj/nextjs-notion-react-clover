@@ -9,13 +9,12 @@ import {
   site,
   appToken
 } from './config';
-import {db} from './db';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
 import {getBrowseTotal, getFriend, getNotionCard} from './hander-redis';
-import { findID, writeJson } from 'components/writeJson';
-const cacheTTL = 8.64e7; // disable cache TTL
+import { appendWriteJson, findID, writeJson } from 'components/writeJson';
 const IdMapPath = 'IDMap.json'
+const KeyMapPath = 'KeyMap.json'
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
@@ -44,13 +43,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     // const cacheTTL = 8.64e7 // one day in milliseconds
 
     if (!pageId && useUriToPageIdCache) {
-      try {
-        // check if the database has a cached mapping of this URI to page ID
-        pageId = await db.get(cacheKey);
-      } catch (err) {
-        // ignore redis errors
-        console.warn(`redis error get "${cacheKey}"`, err.message);
-      }
+      pageId = findID(KeyMapPath,cacheKey)
     }
     if (pageId) {
       recordMap = await getPage(pageId);
@@ -59,18 +52,10 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       // e.g., /developer-x-entrepreneur versus /71201624b204481f862630ea25ce62fe
       const siteMap = await getSiteMap();
       pageId = siteMap?.canonicalPageMap[rawPageId];
-      console.log('rawPageId',rawPageId)
       if (pageId) {
         recordMap = await getPage(pageId);
         if (useUriToPageIdCache) {
-          try {
-            // update the database mapping of URI to pageId
-            await db.set(cacheKey, pageId, cacheTTL);
-            // console.log(`redis set "${cacheKey}"`, pageId, { cacheTTL })
-          } catch (err) {
-            // ignore redis errors
-            console.warn(`redis error set "${cacheKey}"`, err.message);
-          }
+          appendWriteJson(KeyMapPath, {key: cacheKey,id: pageId})
         }
       } else {
           pageId = findID(IdMapPath, encodeURI(rawPageId));
