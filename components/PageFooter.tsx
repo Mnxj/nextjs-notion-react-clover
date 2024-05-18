@@ -11,11 +11,12 @@ export const PageFooter: React.FC<{
   friends: Array<any>
   appToken: AppToken,
   notionCard: any,
-}> = ({pageId, friends, appToken,notionCard}) => {
+  tagsPage:boolean
+}> = ({pageId, friends, appToken,notionCard,tagsPage}) => {
   return <>
     {!isEmpty(friends) && <Friends friends={friends}/>}
     {!isEmpty(notionCard)&&!isEmpty(notionCard.children)&& <PageFooterDetail children={notionCard.children} />}
-    {!(eq(rootNotionPageId, pageId) || isEmpty(appToken.appId) || isEmpty(appToken.appKey))
+    {!(eq(rootNotionPageId, pageId) || isEmpty(appToken.appId) || isEmpty(appToken.appKey)) && !tagsPage
       && <Valine path={pageId} appId={appToken.appId} appKey={appToken.appKey}/>}
   </>;
 };

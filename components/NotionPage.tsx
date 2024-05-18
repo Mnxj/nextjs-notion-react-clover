@@ -170,7 +170,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
                                                         notionCard,
                                                         error,
                                                         pageId,
-                                                        browseTotal,
                                                         tagsPage,
                                                         friends,
                                                         propertyToFilterName
@@ -213,27 +212,20 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const pageFooter = React.useMemo(
     () => (
-      <PageFooter pageId={pageId} friends={friends} appToken={appToken} notionCard={notionCard}/>
+      <PageFooter pageId={pageId} friends={friends} appToken={appToken} notionCard={notionCard} tagsPage={tagsPage} />
     ),
-    [pageId, friends, appToken,notionCard]
+    [pageId, friends, appToken,notionCard,tagsPage]
   );
+  
 
-  const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
+  const footer = React.useMemo(() => <Footer/>,[]);
   if (error || !site || !block) {
-    return <Page404 site={site} pageId={pageId} browseTotal={browseTotal} error={error}/>;
+    return <Page404 site={site} pageId={pageId} error={error}/>;
   }
 
   const name = getBlockTitle(block, recordMap) || site.name;
   const title =
     tagsPage && propertyToFilterName ? `"${propertyToFilterName}"` : name;
-
-  // console.log('notion page', {
-  //   isDev: config.isDev,
-  //   title,
-  //   pageId,
-  //   rootNotionPageId: site.rootNotionPageId,
-  //   recordMap
-  // })
 
   if (!isServer) {
     // add important objects to the window global for easy debugging

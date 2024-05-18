@@ -1,33 +1,40 @@
 import fs from 'fs';
 
 export const writeJson = (filename: string,value:any) => {
-    fs.writeFile(filename, JSON.stringify(value),err => {
-        if(err){
-            console.log('写入失败')
-            return;
-        }
-    });
+    fs.writeFile(filename, JSON.stringify(value),()=>{});
 }
 
 export const appendWriteJson = (filename: string,value:any) => {
-
-    fs.appendFile(filename, JSON.stringify(value),err => {
-        if(err){
-            console.log('写入失败')
-            return;
-        }
-    });
+    fs.appendFile(filename, JSON.stringify(value),()=>{})
     
 }
 
 const readJson = (filename: string) =>  {
-    try {
-        return JSON.parse(fs.readFileSync(filename, 'utf8'));
-    } catch (err) {
-     return []
-   }
+    return new Promise((resolve, reject) => {
+        const readStream = fs.createReadStream(filename, 'utf8');
+    
+        let data = '';
+    
+        readStream.on('data', (chunk) => {
+          data += chunk;
+        });
+    
+        readStream.on('end', () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (err) {
+            reject(err);
+          }
+        });
+    
+        readStream.on('error', reject);
+      });
 }
 
-export const findID = (filename: string, key: string) => {
-    return Array(readJson(filename)).find(item=> !!item[key])?.id;
+export const findID = async (filename: string, key: string) => {
+    return Object.values(await readJson(filename)).find(item=> item['id'] === key)?.['id'];
+}
+
+export const findValue = async (filename: string, key: string) => { 
+    return Object.values(await readJson(filename)).find(item=> item['id'] === key)?.['value'];
 }

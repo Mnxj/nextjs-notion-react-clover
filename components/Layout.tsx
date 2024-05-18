@@ -13,7 +13,7 @@ import { debounce } from 'lodash';
 import { animateParticules, updateCoords } from '../lib/mouse-click-animation';
 
 
-const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
+const Layout = ({children, isNotNotionFooter, title}: any) => {
   const [openNav, setOpenNav] = useState (false);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
         </div>
         <PageHeader block={null}/>
         {children}
-        {isNotNotionFooter && <Footer browse={browseTotal}/>}
+        {isNotNotionFooter && <Footer/>}
       </section>
       <Sidebar openNav={openNav}/>
       <GitHubShareButton/>

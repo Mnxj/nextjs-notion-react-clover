@@ -4,13 +4,13 @@ import ProgressiveImg from './ProgressiveImg';
 import {useRouter} from 'next/router';
 import {Loading} from './Loading';
 
-export const LayoutTemp = ({children, browseTotal, LayoutTitle, url}: any) => {
+export const LayoutTemp = ({children, LayoutTitle, url}: any) => {
   const router = useRouter()
   if (router.isFallback) {
     return <Loading />
   }
   return (
-    <Layout browseTotal={browseTotal} isNotNotionFooter={true} title={LayoutTitle}>
+    <Layout isNotNotionFooter={true} title={LayoutTitle}>
       <div className='notion-page-scroller'>
         <div className='notion-page-cover-wrapper'>
         <span style={{

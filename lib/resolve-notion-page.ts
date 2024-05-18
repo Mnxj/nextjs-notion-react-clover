@@ -5,13 +5,12 @@ import * as acl from './acl';
 import {
   pageUrlOverrides,
   pageUrlAdditions,
-  environment,
   site,
   appToken
 } from './config';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
-import {getBrowseTotal, getFriend, getNotionCard} from './hander-redis';
+import {getFriend, getNotionCard} from './hander-file';
 import { appendWriteJson, findID, writeJson } from 'components/writeJson';
 const IdMapPath = 'IDMap.json'
 const KeyMapPath = 'KeyMap.json'
@@ -19,7 +18,6 @@ const KeyMapPath = 'KeyMap.json'
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
   let recordMap: ExtendedRecordMap;
-  let browseTotal = await getBrowseTotal();
   let friends = null
 
   let notionCard = null
@@ -37,14 +35,11 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
         pageId = parsePageId(override);
       }
     }
-    const useUriToPageIdCache = true;
-    const cacheKey = `uri-to-page-id:${domain}:${environment}:${rawPageId}`;
-    // TODO: should we use a TTL for these mappings or make them permanent?
-    // const cacheTTL = 8.64e7 // one day in milliseconds
 
-    if (!pageId && useUriToPageIdCache) {
-      pageId = findID(KeyMapPath,cacheKey)
+    if (!pageId) {
+      pageId = await findID(KeyMapPath,rawPageId)
     }
+    
     if (pageId) {
       recordMap = await getPage(pageId);
     } else {
@@ -54,11 +49,9 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       pageId = siteMap?.canonicalPageMap[rawPageId];
       if (pageId) {
         recordMap = await getPage(pageId);
-        if (useUriToPageIdCache) {
-          appendWriteJson(KeyMapPath, {key: cacheKey,id: pageId})
-        }
+        appendWriteJson(KeyMapPath, {key: rawPageId,id: pageId})
       } else {
-          pageId = findID(IdMapPath, encodeURI(rawPageId));
+          pageId = await findID(IdMapPath, encodeURI(rawPageId));
           console.log('pageId',pageId)
           if(pageId){
             return {
@@ -86,11 +79,10 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
         }
       })
     });
-    console.log('keyArray',keyArray)
     writeJson(IdMapPath, keyArray);
   }
  
 
-  const props = {site, appToken, notionCard, recordMap, pageId, browseTotal,friends};
+  const props = {site, appToken, notionCard, recordMap, pageId,friends};
   return {...props, ...(await acl.pageAcl(props))};
 }

@@ -5,11 +5,11 @@ import {PageHead} from './PageHead';
 import styles from './styles.module.css';
 import Layout from './Layout';
 
-export const Page404: React.FC<types.PageProps> = ({site, pageId, browseTotal, error}) => {
+export const Page404: React.FC<types.PageProps> = ({site, pageId, error}) => {
   const title = site?.name || 'Notion Page Not Found';
 
   return (
-    <Layout isNotNotionFooter={true} browseTotal = {browseTotal}>
+    <Layout isNotNotionFooter={true}>
       <PageHead site={site} title={title}/>
 
       <main className={styles.main}>

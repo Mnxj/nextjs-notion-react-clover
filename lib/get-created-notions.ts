@@ -1,12 +1,11 @@
 import {articlesPageId, friendDatabasePageId, notionId} from './config';
 import {Client} from '@notionhq/client';
-import {isEmpty} from 'lodash';
-import {db} from './db';
+import { writeJson } from 'components/writeJson';
 
 const notion = new Client({auth: notionId});
-let results = {};
 
-export const getNotionIds = async () => {
+export const getNotionIds = async (path) => {
+  let results = {};
 
   await (async () => {
     const response = await notion.databases.query({
@@ -33,12 +32,13 @@ export const getNotionIds = async () => {
           date: monthDay
         });
     });
-    await setResults(results, 'induction')
+    writeJson(path, {id:'induction',value: results});
   })().catch(err => console.warn(`notion query :`, err.message));
   return results;
 };
 
-export const getFriends = async () => {
+export const getFriends = async (path) => {
+  let results = {};
   (async () => {
     const response = await notion.databases.query({
       database_id: friendDatabasePageId,
@@ -52,26 +52,18 @@ export const getFriends = async () => {
     response['results'].forEach(result=>{
       const properties = result['properties']
       if(!properties.Invalid.checkbox){
-        const link = properties.Link.rich_text[0].plain_text
+        const link = String(properties.Link.rich_text[0].plain_text);
         results[link]= { icon: properties.Icon.rich_text[0].plain_text, name: properties.Name.title[0].plain_text, description: properties.Description.rich_text[0].plain_text}
       }
     });
-    await setResults(results, 'friend')
+
+    writeJson(path, {id:'friend',value: results});
   })().catch(err => console.warn(`notion query :`, err.message));
   return results;
 }
 
-const setResults = async (results, key) => {
-  if (!isEmpty(results)) {
-    try {
-      await db.set(key, results, 8.64e7);
-    } catch (err) {
-      console.warn(`redis error :`, err.message);
-    }
-  }
-}
-
-export const getNotionCards = async () => {
+export const getNotionCards = async (path) => {
+  let results = {};
   await (async () => {
     const response = await notion.databases.query({
       database_id: articlesPageId,
@@ -96,7 +88,7 @@ export const getNotionCards = async () => {
     for(let i = 1 ; i< notions.length-1 ;i++){
       results[notions[i]['id']]={up:notions[i+1],next:notions[i-1]}
     }
-    await setResults(results, 'NotionCards')
+    writeJson(path, {id:'notionCard',value: results});
   })().catch(err => console.warn(`notion query :`, err.message));
   return results;
 };

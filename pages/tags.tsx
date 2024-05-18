@@ -4,7 +4,6 @@ import {ExtendedRecordMap} from 'notion-types';
 import {isEmpty, random} from 'lodash';
 import Link from 'next/link';
 import {LayoutTemp} from '../components/LayoutTemp';
-import {getBrowseTotal} from '../lib/hander-redis';
 import {articlesPageId, tagsIcon, tagsPageId} from '../lib/config';
 
 
@@ -24,8 +23,7 @@ export const getStaticProps = async () => {
     key: String(item.value.value),
     total: item.total
   }));
-  const browseTotal= await getBrowseTotal()
-  const props = {resultMap,browseTotal}
+  const props = {resultMap}
   return {
     props,
     revalidate: 60

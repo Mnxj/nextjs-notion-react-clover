@@ -2,13 +2,11 @@ import * as React from 'react';
 import {domain} from 'lib/config';
 import {resolveNotionPage} from 'lib/resolve-notion-page';
 import {NotionPage} from 'components';
-import {db} from '../lib/db';
 import * as types from '../lib/types';
 
 export const getStaticProps = async () => {
   try {
     const props = await resolveNotionPage(domain) as types.PageProps;
-    await db.set('browse', props.browseTotal);
     return {props, revalidate: 60};
   } catch (err) {
     console.error('page error', domain, err);
