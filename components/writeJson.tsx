@@ -29,5 +29,5 @@ const readJson = (filename: string) =>  {
 }
 
 export const findID = (filename: string, key: string) => {
-    return readJson(filename).find(item=> !!item[key])?.id;
+    return Array(readJson(filename)).find(item=> !!item[key])?.id;
 }
