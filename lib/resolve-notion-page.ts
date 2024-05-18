@@ -73,6 +73,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
         try {
           // check if the database has a cached mapping of this URI to page ID
           pageId = await db.get(rawPageId);
+          console.log('pageId',pageId)
           recordMap = await getPage(pageId);
         } catch (err) {
           return {
@@ -99,6 +100,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
         }
       })
     });
+    console.log('keyArray',keyArray)
     keyArray.forEach(async({id,title})=> {
       await db.set(title, id, cacheTTL);
     })
