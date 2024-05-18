@@ -37,6 +37,3 @@ yarn-error.log*
 package-lock.json
 # idea
 .idea
-
-IDMap.json
-KeyMap.json
