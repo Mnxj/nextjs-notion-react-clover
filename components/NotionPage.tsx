@@ -4,7 +4,6 @@ import {eq} from 'lodash';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import cs from 'classnames';
-import {useRouter} from 'next/router';
 import {useSearchParam} from 'react-use';
 import {PageBlock} from 'notion-types';
 
@@ -177,7 +176,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
                                                         friends,
                                                         propertyToFilterName
                                                       }) => {
-  const router = useRouter();
   const lite = useSearchParam('lite');
 
   const components = React.useMemo(
@@ -223,9 +221,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
   
-  if (router.isFallback) {
-    return <Loading/>;
-  }
   if (error || !site || !block) {
     return <Page404 site={site} pageId={pageId} error={error}/>;
   }
