@@ -40,18 +40,17 @@ const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
             setCanvasSize()
             window.addEventListener('resize', setCanvasSize, !1);
     }
-  }, []);
 
-  useEffect(() => {
-    // 监听路由变化事件
-    router.events.on('routeChangeStart', () => {
-      console.log('routeChangeStart');
-    });
-
-    // 监听路由变化完成事件
-    router.events.on('routeChangeComplete', () => {
-      console.log('routeChangeComplete');
-    });
+      // 监听路由变化
+  router.events.on('routeChangeStart', () => {
+    console.log('路由开始变化');
+  });
+  router.events.on('routeChangeComplete', () => {
+    console.log('路由变化完成');
+  });
+  router.events.on('routeChangeError', () => {
+    console.log('路由变化出错');
+  });
   }, [router]);
 
 
