@@ -51,7 +51,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     }
     if (pageId) {
       recordMap = await getPage(pageId);
-      console.log('pageId',pageId)
     } else {
       // handle mapping of user-friendly canonical page paths to Notion page IDs
       // e.g., /developer-x-entrepreneur versus /71201624b204481f862630ea25ce62fe
@@ -59,17 +58,11 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       pageId = siteMap?.canonicalPageMap[rawPageId];
       console.log('rawPageId',rawPageId)
       if (pageId) {
-        // TODO: we're not re-using the page recordMap from siteMaps because it is
-        // cached aggressively
-        // recordMap = siteMap.pageMap[pageId]
-
         recordMap = await getPage(pageId);
-
         if (useUriToPageIdCache) {
           try {
             // update the database mapping of URI to pageId
             await db.set(cacheKey, pageId, cacheTTL);
-
             // console.log(`redis set "${cacheKey}"`, pageId, { cacheTTL })
           } catch (err) {
             // ignore redis errors
@@ -77,13 +70,18 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
           }
         }
       } else {
-        // note: we're purposefully not caching URI to pageId mappings for 404s
-        return {
-          error: {
-            message: `Not found "${rawPageId}"`,
-            statusCode: 404
-          }
-        };
+        try {
+          // check if the database has a cached mapping of this URI to page ID
+          pageId = await db.get(rawPageId);
+          recordMap = await getPage(pageId);
+        } catch (err) {
+          return {
+            error: {
+              message: `Not found "${rawPageId}"`,
+              statusCode: 404
+            }
+          };
+        }
       }
     }
   } else {
@@ -101,8 +99,8 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
         }
       })
     });
-    keyArray.forEach((id,title)=> {
-      //await db.set(title, id, cacheTTL);
+    keyArray.forEach(async({id,title})=> {
+      await db.set(title, id, cacheTTL);
     })
   }
  
