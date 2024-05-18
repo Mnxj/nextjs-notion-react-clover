@@ -221,7 +221,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
   console.log(error, !site ,!block)
   if (error || !site || !block) {
-    return <Page404 site={site} pageId={pageId} error={error}/>;
+    return <Page404 site={site} pageId={pageId} browseTotal={browseTotal} error={error}/>;
   }
 
   const name = getBlockTitle(block, recordMap) || site.name;
