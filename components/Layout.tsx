@@ -11,9 +11,12 @@ import { GitHubShareButton } from './GitHubShareButton';
 import anime from 'animejs';
 import { debounce } from 'lodash';
 import { animateParticules, updateCoords } from '../lib/mouse-click-animation';
+import { useRouter } from 'next/router';
+
 
 const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
   const [openNav, setOpenNav] = useState (false);
+  const router = useRouter();
 
   useEffect(() => {
     const canvasEl = document.querySelector ('.fireworks') as any;
@@ -38,6 +41,18 @@ const Layout = ({children, browseTotal, isNotNotionFooter, title}: any) => {
             window.addEventListener('resize', setCanvasSize, !1);
     }
   }, []);
+
+  useEffect(() => {
+    // 监听路由变化事件
+    router.events.on('routeChangeStart', () => {
+      console.log('routeChangeStart');
+    });
+
+    // 监听路由变化完成事件
+    router.events.on('routeChangeComplete', () => {
+      console.log('routeChangeComplete');
+    });
+  }, [router]);
 
 
   return (
