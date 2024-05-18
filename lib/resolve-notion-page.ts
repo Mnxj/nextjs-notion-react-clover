@@ -15,7 +15,7 @@ import {getSiteMap} from './get-site-map';
 import {getBrowseTotal, getFriend, getNotionCard} from './hander-redis';
 import { findID, writeJson } from 'components/writeJson';
 const cacheTTL = 8.64e7; // disable cache TTL
-const IdMapPath = './public/IDMap.json'
+const IdMapPath = 'IDMap.json'
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
