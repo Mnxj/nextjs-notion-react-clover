@@ -222,11 +222,13 @@ export const NotionPage: React.FC<types.PageProps> = ({
   );
 
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
-
+  console.log('router.isFallback', router.isFallback);
   if (router.isFallback) {
     return <Loading/>;
   }
-
+  console.log('error', error);
+  console.log('!site', !site);
+  console.log('!block', !block);
   if (error || !site || !block) {
     return <Page404 site={site} pageId={pageId} error={error}/>;
   }

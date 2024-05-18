@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  generateStaticProps: true,
   reactStrictMode: true,
   staticPageGenerationTimeout: 300,
   images: {
