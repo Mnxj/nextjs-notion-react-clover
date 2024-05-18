@@ -21,22 +21,18 @@ export const getStaticProps = async () => {
 };
 
 export default function NotionDomainPage(props) {
-  console.log('index',props);
   const router = useRouter();
     // 监听路由变化
     React.useEffect(() => {
-      router.events.on('routeChangeStart', () => {
-        console.log('index路由开始变化');
-      });
-      router.events.on('routeChangeComplete', () => {
-        console.log('index路由变化完成');
-      });
-      router.events.on('routeChangeError', () => {
-        console.log('index路由变化出错');
-      });
-      router.events.on('beforeHistoryChange', () => {
-        console.log('indexbeforeHistoryChange');
-      });
-    }, [router]);
+      const handleRouteChange = (url) => {
+        console.log('App is changing to: ', url);
+      };
+  
+      router.events.on('routeChangeStart', handleRouteChange);
+  
+      return () => {
+        router.events.off('routeChangeStart', handleRouteChange);
+      };
+    }, [router.events]);
   return <NotionPage  {...props} />
 }
