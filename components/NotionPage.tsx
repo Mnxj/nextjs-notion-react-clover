@@ -18,7 +18,6 @@ import {searchNotion} from 'lib/search-notion';
 import * as types from 'lib/types';
 
 // components
-import {Loading} from './Loading';
 import {Page404} from './Page404';
 import {PageHead} from './PageHead';
 import {PageFooter} from './PageFooter';
@@ -220,7 +219,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
   );
 
   const footer = React.useMemo(() => <Footer browse={browseTotal}/>, [browseTotal]);
-  
+  console.log(error, !site ,!block)
   if (error || !site || !block) {
     return <Page404 site={site} pageId={pageId} error={error}/>;
   }

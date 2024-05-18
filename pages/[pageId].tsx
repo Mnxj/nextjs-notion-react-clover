@@ -3,6 +3,7 @@ import {domain, isDev} from 'lib/config';
 import {getSiteMap} from 'lib/get-site-map'
 import {resolveNotionPage} from 'lib/resolve-notion-page';
 import {NotionPage} from 'components'
+import { Loading } from 'components/Loading';
 export const getStaticProps = async (context) => {
   const rawPageId = context.params.pageId as string
 
@@ -39,5 +40,9 @@ export async function getStaticPaths() {
 }
 
 export default function NotionDomainDynamicPage(props) {
-  return <NotionPage {...props} />
+  if(Object.keys(props).length === 0){
+    return <Loading/>
+  } else {
+    return <NotionPage {...props} />
+  }
 }
