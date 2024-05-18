@@ -19,6 +19,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let recordMap: ExtendedRecordMap;
   let browseTotal = await getBrowseTotal();
   let friends = null
+  const cacheTTL = 8.64e7; // disable cache TTL
   let notionCard = null
   if (rawPageId && rawPageId !== 'index') {
     pageId = parsePageId(rawPageId);
@@ -38,7 +39,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     const cacheKey = `uri-to-page-id:${domain}:${environment}:${rawPageId}`;
     // TODO: should we use a TTL for these mappings or make them permanent?
     // const cacheTTL = 8.64e7 // one day in milliseconds
-    const cacheTTL = 8.64e7; // disable cache TTL
 
     if (!pageId && useUriToPageIdCache) {
       try {
@@ -51,12 +51,13 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     }
     if (pageId) {
       recordMap = await getPage(pageId);
+      console.log('pageId',pageId)
     } else {
       // handle mapping of user-friendly canonical page paths to Notion page IDs
       // e.g., /developer-x-entrepreneur versus /71201624b204481f862630ea25ce62fe
       const siteMap = await getSiteMap();
       pageId = siteMap?.canonicalPageMap[rawPageId];
-
+      console.log('rawPageId',rawPageId)
       if (pageId) {
         // TODO: we're not re-using the page recordMap from siteMaps because it is
         // cached aggressively
@@ -88,7 +89,23 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
   } else {
     pageId = site.rootNotionPageId;
     recordMap = await getPage(pageId);
+    let keyArray = []
+    Array(recordMap['block']).forEach(element => {
+      Object.values(element).forEach(values => {
+        const properties = Object(values['value']['properties']);
+        if(properties.hasOwnProperty('F+kB')){
+          //nextjs-notion-react-clover博客部署教程-2f0f3d3248534cc1ae4ea20006ca6c71
+          const title = properties['title'][0][0]
+          const id = values['value']['id']
+          keyArray.push({id,title});
+        }
+      })
+    });
+    keyArray.forEach((id,title)=> {
+      //await db.set(title, id, cacheTTL);
+    })
   }
+ 
 
   const props = {site, appToken, notionCard, recordMap, pageId, browseTotal,friends};
   return {...props, ...(await acl.pageAcl(props))};
