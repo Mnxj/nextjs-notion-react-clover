@@ -13,6 +13,7 @@ import {db} from './db';
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
 import {getBrowseTotal, getFriend, getNotionCard} from './hander-redis';
+import { findID, writeJson } from 'components/writeJson';
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
@@ -70,19 +71,17 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
           }
         }
       } else {
-        try {
-          // check if the database has a cached mapping of this URI to page ID
-          pageId = await db.get(rawPageId);
+          pageId = findID('IDMap.json', encodeURI(rawPageId));
           console.log('pageId',pageId)
+          if(pageId){
+            return {
+              error: {
+                message: `Not found "${rawPageId}"`,
+                statusCode: 404
+              }
+            };
+          }
           recordMap = await getPage(pageId);
-        } catch (err) {
-          return {
-            error: {
-              message: `Not found "${rawPageId}"`,
-              statusCode: 404
-            }
-          };
-        }
       }
     }
   } else {
@@ -101,9 +100,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       })
     });
     console.log('keyArray',keyArray)
-    keyArray.forEach(async({id,title})=> {
-      await db.set(title, id, cacheTTL);
-    })
+    writeJson('./public/IDMap.json', keyArray);
   }
  
 
