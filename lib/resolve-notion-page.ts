@@ -14,13 +14,15 @@ import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
 import {getBrowseTotal, getFriend, getNotionCard} from './hander-redis';
 import { findID, writeJson } from 'components/writeJson';
+const cacheTTL = 8.64e7; // disable cache TTL
+const IdMapPath = './public/IDMap.json'
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
   let recordMap: ExtendedRecordMap;
   let browseTotal = await getBrowseTotal();
   let friends = null
-  const cacheTTL = 8.64e7; // disable cache TTL
+
   let notionCard = null
   if (rawPageId && rawPageId !== 'index') {
     pageId = parsePageId(rawPageId);
@@ -71,7 +73,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
           }
         }
       } else {
-          pageId = findID('IDMap.json', encodeURI(rawPageId));
+          pageId = findID(IdMapPath, encodeURI(rawPageId));
           console.log('pageId',pageId)
           if(pageId){
             return {
@@ -100,7 +102,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       })
     });
     console.log('keyArray',keyArray)
-    writeJson('./public/IDMap.json', keyArray);
+    writeJson(IdMapPath, keyArray);
   }
  
 

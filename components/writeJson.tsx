@@ -8,7 +8,6 @@ export const writeJson = (filename: string,value:any) => {
             console.log('写入失败')
             return;
         }
-        console.log('写入成功')
     });
 }
 
