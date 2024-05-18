@@ -3,6 +3,7 @@ import {domain, isDev} from 'lib/config';
 import {getSiteMap} from 'lib/get-site-map'
 import {resolveNotionPage} from 'lib/resolve-notion-page';
 import {NotionPage} from 'components'
+import { useRouter } from 'next/router';
 
 export const getStaticProps = async (context) => {
   const rawPageId = context.params.pageId as string
@@ -40,5 +41,7 @@ export async function getStaticPaths() {
 }
 
 export default function NotionDomainDynamicPage(props) {
+  const router = useRouter();
+  console.log('router',router)
   return <NotionPage {...props} />
 }
