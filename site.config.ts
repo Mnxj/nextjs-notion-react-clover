@@ -84,12 +84,12 @@ export default siteConfig({
       span_class: 'faa-parent animated-hover',
       i_class: 'iconfont icon-tags1 faa-vertical'
     },
-    {
-      title: 'Induction',
-      url:'/induction',
-      span_class: 'faa-parent animated-hover',
-      i_class: 'iconfont icon-shounaxiang faa-vertical'
-    },
+    // {
+    //   title: 'Induction',
+    //   url:'/induction',
+    //   span_class: 'faa-parent animated-hover',
+    //   i_class: 'iconfont icon-shounaxiang faa-vertical'
+    // },
     {
       title: 'Friend',
       pageId: '13686de168794011a4c43f41fc833c89',
