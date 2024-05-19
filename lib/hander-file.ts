@@ -1,7 +1,7 @@
 import {friendPageId} from './config';
 import {eq, isEmpty} from 'lodash';
-// import {getFriends, getNotionCards} from './get-created-notions';
-// import { findValue } from 'components/writeJson';
+import {getFriends, getNotionCards} from './get-created-notions';
+import { findValue } from 'components/writeJson';
 import { getCache } from './fetch-json';
 
 export const getFriend = async (pageId) => {
