@@ -8,7 +8,8 @@ Install [Docs](https://clover-blog.cn/nextjs-notion-react-clover%E5%8D%9A%E5%AE%
 
 [Demo](https://clover-blog.cn/) 
 
-
+# next step
+write json when before packing 
 
 # Directory
 nextjs-notion-react-clover

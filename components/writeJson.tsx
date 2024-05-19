@@ -16,7 +16,7 @@ const readJson = (filename: string) =>  {
         let data = '';
     
         readStream.on('data', (chunk) => {
-          data += chunk;
+          data += chunk.toString('utf-8');
         });
     
         readStream.on('end', () => {

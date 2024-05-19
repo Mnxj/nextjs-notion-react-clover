@@ -7,7 +7,8 @@ import { getPageImageUrls, normalizeUrl } from 'notion-utils'
 
 import { defaultPageIcon} from './config'
 import { mapImageUrl } from './map-image-url'
-import { appendWriteJson, findValue } from 'components/writeJson'
+// import { appendWriteJson, findValue } from 'components/writeJson'
+import { getCaches } from './fetch-json'
 const imageMapPath = 'ImageMap.json'
 
 export async function getPreviewImageMap(
@@ -36,7 +37,7 @@ async function createPreviewImage(
   { cacheKey }: { cacheKey: string }
 ): Promise<PreviewImage | null> {
   try {
-    const cachedPreviewImage = await findValue(imageMapPath,cacheKey)
+    const cachedPreviewImage = await getCaches(imageMapPath,cacheKey)
     if (cachedPreviewImage) {
       return cachedPreviewImage
     }
@@ -50,7 +51,7 @@ async function createPreviewImage(
       originalHeight: result.metadata.originalHeight,
       dataURIBase64: result.metadata.dataURIBase64
     }
-    appendWriteJson(imageMapPath,{id:cacheKey, value: previewImage})
+    // appendWriteJson(imageMapPath,{id:cacheKey, value: previewImage})
     return previewImage
   } catch (err) {
     console.warn('failed to create preview image', url, err.message)

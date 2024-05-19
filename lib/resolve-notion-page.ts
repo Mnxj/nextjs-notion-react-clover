@@ -11,7 +11,8 @@ import {
 import {getPage} from './notion';
 import {getSiteMap} from './get-site-map';
 import {getFriend, getNotionCard} from './hander-file';
-import { appendWriteJson, findID, writeJson } from 'components/writeJson';
+// import { appendWriteJson, findID, writeJson } from 'components/writeJson';
+import { getIdCache } from './fetch-json';
 const IdMapPath = 'IDMap.json'
 const KeyMapPath = 'KeyMap.json'
 
@@ -35,9 +36,10 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
         pageId = parsePageId(override);
       }
     }
-
+    const cacheKey = `uri-to-page-id:${domain}:${rawPageId}`;
     if (!pageId) {
-      pageId = await findID(KeyMapPath,rawPageId)
+      pageId = await getIdCache(KeyMapPath,'key',cacheKey)
+      console.log('cacheKey',pageId)
     }
     
     if (pageId) {
@@ -49,10 +51,10 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       pageId = siteMap?.canonicalPageMap[rawPageId];
       if (pageId) {
         recordMap = await getPage(pageId);
-        appendWriteJson(KeyMapPath, {key: rawPageId,id: pageId})
+        // appendWriteJson(cacheKey, {key: rawPageId,id: pageId})
       } else {
-          pageId = await findID(IdMapPath, encodeURI(rawPageId));
-          console.log('pageId',pageId)
+          pageId = await getIdCache(IdMapPath,'title', rawPageId);
+          console.log('rawPageId',rawPageId,pageId)
           if(pageId){
             return {
               error: {
@@ -67,19 +69,19 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
   } else {
     pageId = site.rootNotionPageId;
     recordMap = await getPage(pageId);
-    let keyArray = []
-    Array(recordMap['block']).forEach(element => {
-      Object.values(element).forEach(values => {
-        const properties = Object(values['value']['properties']);
-        if(properties.hasOwnProperty('F+kB')){
-          //nextjs-notion-react-clover博客部署教程-2f0f3d3248534cc1ae4ea20006ca6c71
-          const title = properties['title'][0][0]
-          const id = values['value']['id']
-          keyArray.push({id,title});
-        }
-      })
-    });
-    writeJson(IdMapPath, keyArray);
+    // let keyArray = []
+    // Array(recordMap['block']).forEach(element => {
+    //   Object.values(element).forEach(values => {
+    //     const properties = Object(values['value']['properties']);
+    //     if(properties.hasOwnProperty('F+kB')){
+    //       //nextjs-notion-react-clover博客部署教程-2f0f3d3248534cc1ae4ea20006ca6c71
+    //       const title = properties['title'][0][0]
+    //       const id = values['value']['id']
+    //       keyArray.push({id,title});
+    //     }
+    //   })
+    // });
+    // writeJson(IdMapPath, keyArray);
   }
  
 
