@@ -8,47 +8,33 @@ import { Sidebar } from './sidebar/Sidebar';
 import { PageHead } from './PageHead';
 import { author, logo } from '../lib/config';
 import { GitHubShareButton } from './GitHubShareButton';
-import anime from 'animejs';
-import { debounce } from 'lodash';
-import { animateParticules, updateCoords } from '../lib/mouse-click-animation';
 
+
+import MouseClickAnimation from 'react-click-display-fireworks';
 
 const Layout = ({children, isNotNotionFooter, title}: any) => {
   const [openNav, setOpenNav] = useState (false);
-
   useEffect(() => {
+    
     const canvasEl = document.querySelector ('.fireworks') as any;
     if (canvasEl) {
-      const ctx = canvasEl.getContext ('2d'),
-            setCanvasSize = debounce ( () => {
-              canvasEl.width = 2 * window.innerWidth
-              canvasEl.height = 2 * window.innerHeight
-              canvasEl.style.width = window.innerWidth + 'px'
-              canvasEl.style.height = window.innerHeight + 'px'
-              canvasEl.getContext ('2d').scale (2, 2)
-          }, 500);
-      anime({
-        duration: 1 / 0,
-        update: () => ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
-      });
+      const mouse = new MouseClickAnimation(canvasEl);
 
       const onMousedown =
         (e ) => {
-          updateCoords(e, canvasEl)
-          animateParticules(ctx)
+          mouse.updateCoords(e)
+          mouse.animateParticules()
       }
       document.addEventListener('mousedown',onMousedown)
-      setCanvasSize()
-      window.addEventListener('resize', setCanvasSize);
+      mouse.setCanvasSize();
+      window.addEventListener('resize', mouse.setCanvasSize);
       return () => {
         document.removeEventListener('mousedown',onMousedown);
-        window.removeEventListener('resize', setCanvasSize);
+        window.removeEventListener('resize', mouse.setCanvasSize);
 
       }
     }
   }, []);
-
-
   return (
     <>
       <canvas className='fireworks' style={{position: 'fixed', left: 0, top: 0, zIndex: 99999999, pointerEvents: 'none',}}/>
